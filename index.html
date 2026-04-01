@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J3-27届校招进展</title>
+<style>
+:root{--bg:#0f1117;--bg2:#1a1d27;--card:#21242f;--border:#2e3240;--text:#e4e6ed;--text2:#9498a8;--accent:#4f8cff;--accent2:#6c5ce7;--green:#00d68f;--orange:#ffaa00;--red:#ff4757;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.header{background:linear-gradient(135deg,#1a1d27,#21242f,#1a1d27);border-bottom:1px solid var(--border);padding:32px 40px 24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(79,140,255,.08),transparent 70%);border-radius:50%}
+.header h1{font-size:28px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.header p{color:var(--text2);font-size:14px}
+.nav-bar{display:flex;gap:6px;margin-top:20px}
+.nav-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--text2);padding:10px 24px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:600;transition:all .25s;position:relative}
+.nav-btn:hover{background:rgba(79,140,255,.1);color:var(--text)}
+.nav-btn.active{background:rgba(79,140,255,.18);color:var(--accent);border-color:rgba(79,140,255,.4);box-shadow:0 2px 12px rgba(79,140,255,.15)}
+.nav-btn.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:3px;background:var(--accent);border-radius:3px}
+.refresh-btn{background:rgba(0,214,143,.12);border:1px solid rgba(0,214,143,.3);color:var(--green);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;white-space:nowrap}
+.refresh-btn:hover{background:rgba(0,214,143,.2);transform:scale(1.03)}
+.trend-tab{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
+.trend-tab:hover{background:rgba(79,140,255,.08);color:var(--text)}
+.trend-tab.active{background:rgba(79,140,255,.12);color:var(--accent);border-color:rgba(79,140,255,.3)}
+.insight-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:24px;position:relative;overflow:hidden}
+.insight-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.insight-card.insight-overview::before{background:var(--accent)}
+.insight-card.insight-risk::before{background:var(--red)}
+.insight-card.insight-action::before{background:var(--green)}
+.insight-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.insight-title .tag-ov{color:var(--accent)}
+.insight-title .tag-risk{color:var(--red)}
+.insight-title .tag-action{color:var(--green)}
+.insight-body{font-size:13px;color:var(--text2);line-height:2}
+.insight-body b{color:var(--text);font-weight:600}
+.insight-body .hl-red{color:var(--red);font-weight:600}
+.insight-body .hl-green{color:var(--green);font-weight:600}
+.insight-body .hl-orange{color:var(--orange);font-weight:600}
+.insight-body .hl-blue{color:var(--accent);font-weight:600}
+.insight-body ul{margin:6px 0 6px 18px;padding:0}
+.insight-body li{margin-bottom:4px}
+.insight-section{margin-bottom:24px}
+.insight-section-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--accent);color:var(--text);padding:16px 28px;border-radius:10px;font-size:14px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:999;display:none;text-align:center;line-height:1.8;max-width:420px}
+.container{max-width:1500px;margin:0 auto;padding:24px 40px 60px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;transition:transform .2s,box-shadow .2s}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.kpi-label{font-size:13px;color:var(--text2);margin-bottom:8px}
+.kpi-value{font-size:32px;font-weight:800}
+.kpi-sub{font-size:12px;color:var(--text2);margin-top:4px}
+.kpi-blue .kpi-value{color:var(--accent)}.kpi-green .kpi-value{color:var(--green)}.kpi-orange .kpi-value{color:var(--orange)}.kpi-red .kpi-value{color:var(--red)}.kpi-purple .kpi-value{color:var(--accent2)}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden;animation:fi .4s ease both}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;user-select:none;transition:background .2s}
+.sh:hover{background:rgba(79,140,255,.05)}
+.sh .l{display:flex;align-items:center;gap:14px}
+.ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.pn{font-size:16px;font-weight:600}
+.ar{font-size:12px;color:var(--text2);transition:transform .3s}.ar.o{transform:rotate(90deg)}
+.ss{display:flex;gap:24px;font-size:13px;color:var(--text2);padding:0 24px 16px;flex-wrap:wrap}
+.ss b{font-weight:600}
+.sb{display:none}.sb.o{display:block}
+.tw{overflow-x:auto;padding:0 24px 20px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{position:sticky;top:0;background:var(--bg2);color:var(--text2);font-weight:600;font-size:12px;text-align:center;padding:10px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody td{padding:10px 8px;border-bottom:1px solid rgba(46,50,64,.5);text-align:center;vertical-align:middle}
+tbody td:first-child{text-align:left;font-weight:500;white-space:nowrap}
+tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.04)}
+.pb{width:100%;max-width:100px;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin:0 auto}
+.pb .f{height:100%;border-radius:3px;transition:width .6s ease}
+.bcs{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+.bcs h3{font-size:16px;font-weight:600;margin-bottom:20px}
+.br{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bl{width:140px;font-size:13px;font-weight:500;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt{flex:1;height:28px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden}
+.bf{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;font-size:12px;font-weight:600;color:#fff;min-width:fit-content;transition:width .8s ease}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.cc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.cc h3{font-size:16px;font-weight:600;margin-bottom:16px}
+.cc canvas{display:block;margin:0 auto}
+.hl{display:flex;gap:12px;margin-top:16px;justify-content:center;flex-wrap:wrap}
+.hi{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)}
+.hd{width:10px;height:10px;border-radius:50%}
+.dt{font-size:12px;color:var(--text2);max-width:200px;text-align:left;line-height:1.5}
+.nt{font-size:11px;color:var(--text2);max-width:220px;text-align:left;line-height:1.4}
+.tg2{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.t1{background:rgba(255,71,87,.15);color:var(--red)}
+.t2{background:rgba(255,170,0,.15);color:var(--orange)}
+.t3{background:rgba(0,214,143,.15);color:var(--green)}
+.eab{background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.3);color:var(--accent);padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;transition:all .2s}
+.eab:hover{background:rgba(79,140,255,.2)}
+.warn-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:600;background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.25);animation:pulse 2s ease-in-out infinite}
+.ok-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:600;background:rgba(0,214,143,.12);color:var(--green);border:1px solid rgba(0,214,143,.25)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.footer{text-align:center;padding:32px;color:var(--text2);font-size:12px;border-top:1px solid var(--border);margin-top:20px}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.container{padding:16px}.header{padding:20px 16px}.cg{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast">💡 请在 <b>WorkBuddy</b> 中发送「<span style="color:var(--accent)">刷新数据</span>」<br>即可自动拉取最新数据并更新页面</div>
+<div class="header">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between">
+    <div>
+      <h1>J3-27届校招进展</h1>
+      <p>数据统计截至 2026.04.01 · 共 13 个项目/中心 · 总需求数 328</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
+      <span style="font-size:12px;color:var(--text2)">🕐 上次更新：2026-04-01 10:00</span>
+      <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <button class="nav-btn active" id="navOv" onclick="swNav('ov')">📊 总览</button>
+    <button class="nav-btn" id="navProj" onclick="swNav('proj')">📁 按项目</button>
+    <button class="nav-btn" id="navRole" onclick="swNav('role')">🏷️ 按职位</button>
+    <button class="nav-btn" id="navHr" onclick="swNav('hr')">👤 按 HR</button>
+  </div>
+</div>
+<div class="container">
+  <!-- 总览 -->
+  <div id="ovView">
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">328</div><div class="kpi-sub">13 个项目/中心</div></div>
+      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">17</div><div class="kpi-sub">占比 5.18%</div></div>
+      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">311</div><div class="kpi-sub">剩余 94.82%</div></div>
+      <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">240</div><div class="kpi-sub">复试 39 · HR面试 14</div></div>
+    </div>
+    <div class="bcs"><h3>📊 各项目需求数排行</h3><div id="bc"></div></div>
+    <div class="cg">
+      <div class="cc"><h3>🥧 项目组需求占比</h3><canvas id="pc" width="300" height="300"></canvas></div>
+      <div class="cc"><h3>👥 岗位类型需求分布</h3><canvas id="rc" width="300" height="300"></canvas></div>
+    </div>
+    <!-- 趋势图 -->
+    <div class="bcs" style="margin-bottom:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <h3>📈 双周校招完成率趋势</h3>
+        <div style="display:flex;gap:6px">
+          <button class="trend-tab active" id="ttAll" onclick="swTrend('all')">总完成率</button>
+          <button class="trend-tab" id="ttProj" onclick="swTrend('proj')">按项目</button>
+          <button class="trend-tab" id="ttRole" onclick="swTrend('role')">按职位</button>
+        </div>
+      </div>
+      <div id="trendAll"><canvas id="trendCanvasAll" width="800" height="320"></canvas></div>
+      <div id="trendRole" style="display:none"><canvas id="trendCanvasRole" width="800" height="320"></canvas></div>
+      <div id="trendProj" style="display:none"><canvas id="trendCanvasProj" width="800" height="320"></canvas></div>
+      <p style="font-size:11px;color:var(--text2);margin-top:12px;text-align:center">每双周周五 24:00 自动采集数据快照 · 数据积累越多趋势越清晰</p>
+    </div>
+    <!-- 总览洞察 -->
+    <div class="insight-section">
+      <div class="insight-section-title">🧠 数据洞察与建议</div>
+      <div id="insightOverview"></div>
+    </div>
+  </div>
+  <!-- 按项目 -->
+  <div id="projView" style="display:none">
+    <div id="insightProj"></div>
+    <div style="margin-bottom:16px;display:flex;justify-content:flex-end"><button class="eab" onclick="ta('proj')">展开/折叠全部</button></div>
+    <div id="sec"></div>
+  </div>
+  <!-- 按 HR -->
+  <div id="hrView" style="display:none">
+    <div id="insightHr"></div>
+    <div style="margin-bottom:16px;display:flex;justify-content:flex-end"><button class="eab" onclick="ta('hr')">展开/折叠全部</button></div>
+    <div id="hrSec"></div>
+  </div>
+  <!-- 按职位 -->
+  <div id="roleView" style="display:none">
+    <div id="insightRole"></div>
+    <div style="margin-bottom:16px;display:flex;justify-content:flex-end"><button class="eab" onclick="ta('role')">展开/折叠全部</button></div>
+    <div id="roleSec"></div>
+  </div>
+</div>
+<div class="footer">J3-27届校招进展 · 可视化报表 · 数据来源：企业微信文档</div>
+<script>
+var P=[
+{n:"逆战项目组",ic:"NZ",c:"#e74c3c",r:[
+["策划组","内容*5、战斗*3、数值*2、商业化*3",13,0,13,0,12,1,0,"garenzhou(周妙林)、gianwang(王基安)、shikiccliu(刘闯)","philipxxu(徐鹏翔)","candy",0,""],
+["美术组","3D:动作*2、场景*3、特效*2、角色*5<br>2D:商业化角色*1、怪*1、武器*1",18,2,16,11,0,0,0,"zakkli(李涛)、zhenglu(路政)、vicwu(吴承科)","migotang(汤晶晶)","杨倩",0,""],
+["客户端组","战斗-武器*1、战斗-3C/动画*1、战斗-怪物*1、玩法*2、系统*3、效能*1、性能*1",10,2,8,20,17,5,2,"arielchou(周喆)、gaviviliu(刘嘉蕙)等","evanlu(陆鹤云)","杨倩",0,""],
+["服务器组","/",6,0,6,0,2,2,0,"ericzli(李智)","colincheng(程用远)","杨倩",0,""],
+["项目管理组","/",2,0,2,0,11,0,0,"ninapiao(朴海兰)","kellyqing(卿慧玲)","杨倩",0,""]
+]},
+{n:"C-Game项目组",ic:"CG",c:"#3498db",r:[
+["策划组","系统、玩法、关卡各2",6,0,6,0,7,5,0,"ishmaeltang(唐嘉强)","puckjin(金昱)","小卫",1,""],
+["美术组","2D场景/2D武器/3D场景/3D角色/特效/动画各3",18,0,18,0,0,0,0,"saxonhuang(黄勇)、chermychen(陈辉虹)","louiszhu(朱佳璐)","小卫",6,""],
+["客户端组","系统2，玩法2",4,3,1,75,3,3,2,"marcusli(李锐)、linclin(林凯)、steekwu(吴帅林)","rayhuang(黄立君)","小卫",2,""],
+["服务器组","",3,0,3,0,24,1,2,"iczhao、kunxiong、beardzhang等","jerrychen(陈明建)","小卫",1,""],
+["项目管理组","",3,0,3,0,0,0,0,"keyizhang(张可依)","masondyu(于栋)","小卫",1,""]
+]},
+{n:"Delta Force项目组",ic:"DF",c:"#f39c12",r:[
+["策划组","系统3、商业化3、叙事3、战斗3、关卡2、海外2",16,0,16,0,3,0,0,"xianwenwang(王贤文)、irisqzhang(张茜)等","rickyliao(廖磊)","candy",8,""],
+["美术组","场景原画*2;美宣*2;角色原画*3;武器原画*3;3D场景*6;3D角色*4;3D武器*4;3D动作*4;演绎动画*2;技术美术*2;特效*2",34,3,31,9,2,0,0,"leogzli(李广照)、ryanzzzhang(张粤光睿)等","williamqliu(QUN LIU)、huaouyang(欧阳欣)","小卫",18,""],
+["客户端组","系统2，玩法8，上海6",16,3,13,19,21,6,5,"quarterzeng(曾青)、vincentclin(林灿声)等","catliang(梁尚立)","嘉绮",0,""],
+["服务器组","系统4，AI2",6,0,6,0,3,0,0,"trumanzhao(赵纯峰)、coryhuang(黄科立)","simonxie(谢文)","嘉绮",0,""],
+["项目管理组","版本*2、APM*2",4,0,4,0,0,0,0,"kuanni(倪宽)、jieruzhao(赵杰儒)、msun(孙星)","kellyqing(卿慧玲)","小滨",2,"计划留用1个版本、1个APM"]
+]},
+{n:"穿越火线手游项目组",ic:"CF",c:"#2ecc71",r:[
+["策划组","武器、系统、商业*1<br>关卡*3",6,0,6,0,8,0,0,"dodgeluo(罗展鸿)、ritterxu(许锐霆)","nickbai(白鹤松)、hankhwang(王晗)","candy",3,""],
+["美术组","3D角色:3/3D武器:2/3D场景:2/3D动作:2/3D特效:2/原画:4",15,0,15,0,0,0,0,"foneliu(刘洋)、xudanwang(王广东)、harleywan(万超)","eirali(李彦)","berry",0,""],
+["客户端组","gameplay/系统/引擎各1，好苗子可再录",4,0,4,0,37,0,0,"bigseasong(宋海洋)","sean(吴佳伟)","10",2,""],
+["服务器组","3个系统、1个算法",4,0,4,0,21,7,0,"youngylin(林洋)","blessccao(操程)","10",2,""],
+["项目管理组","1个美术PM 1个版本PM",2,0,2,0,0,0,0,"answerpeng(彭盛)","answerpeng(彭盛)","berry",1,""]
+]},
+{n:"CFH项目组",ic:"CH",c:"#9b59b6",r:[
+["策划组","关卡2、怪物2、玩法1、数值1、系统活跃1、商业化1、武器1、3C1、任务1、叙事1",12,1,11,8,1,0,0,"yuanzheli(李源哲)、philgao(高峰)","richfu(傅裕)","berry",6,""],
+["美术组","角色、场景、硬表面各2<br>3D角色、3D怪物、3D场景、3D特效、3D武器、3D动作各2",18,0,18,0,0,0,0,"hengzzheng(郑恒)、pandayhcui(崔咏颢)","fredyiyang(杨溢)、rufusfeng(冯达勇)","berry",0,""],
+["客户端组","系统4，战斗、怪物、玩法、专项各1",8,0,8,0,10,4,0,"ianyzhang(张毅)","victorzeng(曾凡胜)","嘉绮",0,""],
+["服务器组","2系统、1UE DS",3,0,3,0,8,0,0,"paveelin(林志平)","slevinli(李选能)","10",1,""],
+["项目管理组","版本PM",1,0,1,0,0,0,0,"fangyichen(陈芳依)","feliciajxfu(傅金希)","berry",1,""]
+]},
+{n:"体验设计组",ic:"UX",c:"#1abc9c",r:[
+["视觉设计","",5,0,5,0,1,0,0,"chuckhu(胡艺钟)、joeeyxie(谢蛟)、reechen(陈永锐)","taotao(陶伟)","candy",3,""],
+["交互设计","",4,0,4,0,1,0,0,"chuckhu(胡艺钟)、joeeyxie(谢蛟)、reechen(陈永锐)","taotao(陶伟)","candy",2,""],
+["动效设计","",1,0,1,0,0,0,0,"chuckhu(胡艺钟)、joeeyxie(谢蛟)、reechen(陈永锐)","","candy",0,""]
+]},
+{n:"宣发设计组",ic:"AD",c:"#e67e22",r:[
+["品宣平面设计师","",3,0,3,0,0,0,0,"sidyuan(袁洪珊)","taotao(陶伟)","candy",1,""],
+["美宣设计师","",3,0,3,0,0,0,0,"sidyuan(袁洪珊)","taotao(陶伟)","candy",1,""],
+["导演","",2,0,2,0,0,0,0,"sidyuan(袁洪珊)","taotao(陶伟)","candy",1,""]
+]},
+{n:"技术美术组",ic:"TA",c:"#00cec9",r:[
+["技术美术","渲染",4,0,4,0,8,0,0,"lichuanwang(LICHUAN WANG)","taotao(陶伟)","candy",2,""]
+]},
+{n:"综合管理组",ic:"PM",c:"#636e72",r:[
+["PM","TA引擎*1、多媒体*1",2,0,2,0,3,1,0,"ninapiao(朴海兰)、amandaszhu(朱爽)、halechen(陈灏)","kellyqing(卿慧玲)","小滨",1,""]
+]},
+{n:"运营组",ic:"OP",c:"#fd79a8",r:[
+["DF海外宣发组","欧美宣发运营*2、欧美内容运营*2、全球BD运营*1、全球电竞运营*2、移动渠道/HD端渠道*1",8,0,8,0,3,0,0,"wallacewei(魏璟燊)","virginialin(林彦岑)","小滨",3,""],
+["DF国内宣发组","宣发*4、内容*4、赛事*4、IP+BD*2、社区*4",18,0,18,0,3,0,0,"saraywang(王玥)","saraywang(王玥)","小滨",9,"计划留用*9，对应模块留用50%"],
+["DF产品运营组","活跃*5、商业化*3、数值*3",11,1,10,9,3,0,1,"marlonpeng(彭羽)/gibbyfang(房小琳)/laurentchen(陈文)","seanxia(夏西)","小滨",7,"计划留用*7，活跃*3、数值*2、商业化*2"],
+["版本和平台运营组","版本*2、渠道*2",4,0,4,0,3,0,0,"lucasxu(徐博玮)、linnyang(杨羚)","aaronwu(吴俊宏)","小滨",2,"计划留用*2，需新血液"],
+["数据研究组","数据分析*3",3,0,3,0,7,1,0,"joycexhchen(陈小欢)","santostang(唐松)","小滨",1,"组内年轻人较多，考虑带人压力"],
+["运营合作组","运营PM*2",2,0,2,0,1,0,0,"maxineli(李嘉贝)","slimyang(杨奇)","小滨",1,"计划留用*1，潜在流失替补"],
+["逆战宣发组","宣发*4",4,0,4,0,0,0,0,"saraywang(王玥)","saraywang(王玥)","小滨",2,"计划留用*2"],
+["逆战产品运营组","端游*1、手游活跃*2、手游商业化*2",5,0,5,0,0,0,0,"leoylzheng(郑焱龙)、sergiochen(陈奥)","kesterxiong(熊潇伟)","小滨",2,"计划留用*2，考虑带教精力"],
+["CODM宣发组","内容运营*2",2,0,2,0,2,0,0,"sasha/conanyang(杨洁)","virginialin(林彦岑)","小滨",2,"计划留用*2，潜在替换HC"],
+["CODM产品运营组","海外活跃*2、海外商业化*1",3,0,3,0,2,1,0,"slimyang(杨奇)","slimyang(杨奇)","小滨",2,""],
+["宣发创意组","",0,0,0,0,0,0,0,"calvinochen(陈俊夫)","cheermei(梅清)","小滨",0,""]
+]},
+{n:"引擎技术组",ic:"EG",c:"#74b9ff",r:[
+["引擎基础组","",1,0,1,0,0,0,0,"sixiaohu(胡斯潇)","jessejiao(焦航)","嘉绮",0,""],
+["引擎一组","",2,0,2,0,0,0,0,"ginoliu(刘绵光)","jessejiao(焦航)","嘉绮",0,""],
+["引擎二组","",3,0,3,0,0,0,0,"kervinchen(陈明洋)","jessejiao(焦航)","嘉绮",0,""],
+["引擎四组","",2,0,2,0,0,0,0,"wenbozhou(周文波)","jessejiao(焦航)","嘉绮",0,""]
+]},
+{n:"质量管理组",ic:"QA",c:"#a29bfe",r:[
+["质量管理组","测试*4",4,2,2,50,13,2,2,"seasonscliu(刘师岑)","kellyqing(卿慧玲)","小滨",2,""]
+]}
+];
+
+function pclr(p){return p>=50?'var(--green)':p>=10?'var(--orange)':'var(--red)'}
+
+function rbar(){
+var el=document.getElementById('bc');
+var s=[].concat(P).sort(function(a,b){return b.r.reduce(function(s,r){return s+r[2]},0)-a.r.reduce(function(s,r){return s+r[2]},0)});
+var mx=s[0].r.reduce(function(s,r){return s+r[2]},0);
+var h='';
+s.forEach(function(p){
+var t=p.r.reduce(function(s,r){return s+r[2]},0);
+var o=p.r.reduce(function(s,r){return s+r[3]},0);
+var w=(t/mx*100).toFixed(1);
+h+='<div class="br"><div class="bl" title="'+p.n+'">'+p.n+'</div><div class="bt"><div class="bf" style="width:'+w+'%;background:'+p.c+'">'+t+'</div></div><div style="width:80px;font-size:13px;font-weight:600;color:var(--green);text-align:right">'+o+' OFFER</div></div>';
+});
+el.innerHTML=h;
+}
+
+function donut(cid,data,colors,labels){
+var cv=document.getElementById(cid),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1,sz=300;
+cv.width=sz*dpr;cv.height=sz*dpr;cv.style.width=sz+'px';cv.style.height=sz+'px';ctx.scale(dpr,dpr);
+var total=data.reduce(function(s,v){return s+v},0),cx=sz/2,cy=sz/2,r=120,ir=60,ang=-Math.PI/2;
+data.forEach(function(v,i){
+if(v===0)return;
+var sl=(v/total)*Math.PI*2;
+ctx.beginPath();ctx.moveTo(cx+ir*Math.cos(ang),cy+ir*Math.sin(ang));
+ctx.arc(cx,cy,r,ang,ang+sl);ctx.arc(cx,cy,ir,ang+sl,ang,true);ctx.closePath();
+ctx.fillStyle=colors[i];ctx.fill();
+if(v/total>.04){var ma=ang+sl/2,lx=cx+(r+ir)/2*Math.cos(ma),ly=cy+(r+ir)/2*Math.sin(ma);
+ctx.fillStyle='#fff';ctx.font='11px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+ctx.fillText(((v/total)*100).toFixed(1)+'%',lx,ly)}
+ang+=sl});
+ctx.fillStyle='#e4e6ed';ctx.font='bold 22px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(total,cx,cy-8);
+ctx.fillStyle='#9498a8';ctx.font='12px sans-serif';ctx.fillText('总计',cx,cy+12);
+var lg='<div class="hl">';
+data.forEach(function(v,i){if(!v)return;lg+='<div class="hi"><div class="hd" style="background:'+colors[i]+'"></div>'+labels[i]+' ('+v+')</div>'});
+lg+='</div>';cv.parentElement.insertAdjacentHTML('beforeend',lg);
+}
+
+function rcharts(){
+donut('pc',P.map(function(p){return p.r.reduce(function(s,r){return s+r[2]},0)}),P.map(function(p){return p.c}),P.map(function(p){return p.n}));
+var rm={};
+P.forEach(function(p){p.r.forEach(function(r){
+var k='其他';
+if(r[0].indexOf('策划')>=0)k='策划';
+else if(/美术|美宣|平面|动效|视觉|交互|导演/.test(r[0]))k='美术/设计';
+else if(r[0].indexOf('客户端')>=0)k='客户端';
+else if(r[0].indexOf('服务器')>=0)k='服务器';
+else if(/项目管理|PM/.test(r[0]))k='项目管理';
+else if(/运营|宣发|产品|数据研究|版本/.test(r[0]))k='运营';
+else if(r[0].indexOf('引擎')>=0)k='引擎';
+else if(/质量|测试/.test(r[0]))k='质量';
+else if(/技术美术|TA/.test(r[0]))k='技术美术';
+rm[k]=(rm[k]||0)+r[2];
+})});
+var se=Object.keys(rm).map(function(k){return[k,rm[k]]}).sort(function(a,b){return b[1]-a[1]});
+donut('rc',se.map(function(r){return r[1]}),['#e74c3c','#3498db','#f39c12','#2ecc71','#9b59b6','#1abc9c','#fd79a8','#74b9ff','#a29bfe','#00cec9'],se.map(function(r){return r[0]}));
+}
+
+function rsec(){
+var el=document.getElementById('sec'),h='';
+var gtn=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[2]},0)},0);
+var gto=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[3]},0)},0);
+var avgPg=gtn>0?(gto/gtn*100):0;
+P.forEach(function(p,pi){
+var tn=p.r.reduce(function(s,r){return s+r[2]},0),to=p.r.reduce(function(s,r){return s+r[3]},0),tp=tn-to;
+var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tcu=p.r.reduce(function(s,r){return s+r[12]},0);
+var tf=p.r.reduce(function(s,r){return s+r[6]},0),ts=p.r.reduce(function(s,r){return s+r[7]},0),th=p.r.reduce(function(s,r){return s+r[8]},0);
+var warn=parseFloat(tpg)<avgPg;
+var warnHtml=warn?'<span class="warn-tag">⚠️ 需关注</span>':'<span class="ok-tag">✓ 正常</span>';
+h+='<div class="sc" style="animation-delay:'+pi*.04+'s"><div class="sh" onclick="tg('+pi+')"><div class="l"><div class="ic" style="background:'+p.c+'">'+p.ic+'</div><div class="pn">'+p.n+'</div>'+warnHtml+'</div>';
+h+='<div style="display:flex;align-items:center;gap:16px"><span style="font-size:13px;color:var(--text2)">需求 <b style="color:var(--text)">'+tn+'</b></span>';
+h+='<span style="font-size:13px;color:var(--green)">OFFER <b>'+to+'</b></span>';
+h+='<span style="font-size:13px;color:var(--accent)">进度 <b>'+tpg+'%</b></span>';
+h+='<span class="ar" id="a'+pi+'">&#9654;</span></div></div>';
+h+='<div class="ss"><span>待招 <b>'+tp+'</b></span><span>初试 <b>'+tf+'</b></span><span>复试 <b>'+ts+'</b></span><span>HR面试 <b>'+th+'</b></span></div>';
+h+='<div class="sb" id="b'+pi+'"><div class="tw"><table><thead><tr><th>岗位/组</th><th style="min-width:160px">细分方向</th><th>需求数</th><th>OFFER</th><th>待招</th><th style="min-width:110px">进度</th><th>初试</th><th>复试</th><th>HR面试</th><th>负责HR</th></tr></thead><tbody>';
+p.r.forEach(function(r){
+var clr=pclr(r[5]);
+h+='<tr><td>'+r[0]+'</td><td><div class="dt">'+(r[1]||'-')+'</div></td>';
+h+='<td><b>'+r[2]+'</b></td>';
+h+='<td style="color:var(--green);font-weight:600">'+r[3]+'</td>';
+h+='<td>'+r[4]+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+r[5]+'%;background:'+clr+'"></div></div><span style="font-size:11px;min-width:36px;color:'+clr+'">'+r[5]+'%</span></div></td>';
+h+='<td>'+r[6]+'</td><td>'+r[7]+'</td><td>'+r[8]+'</td>';
+h+='<td>'+(r[11]||'-')+'</td></tr>';
+});
+var sclr=pclr(parseFloat(tpg));
+h+='<tr style="background:rgba(79,140,255,.06);font-weight:700"><td>合计</td><td></td>';
+h+='<td style="color:var(--accent)">'+tn+'</td><td style="color:var(--green)">'+to+'</td><td>'+tp+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+tpg+'%;background:'+sclr+'"></div></div><span style="font-size:11px;color:'+sclr+'">'+tpg+'%</span></div></td>';
+h+='<td>'+tf+'</td><td>'+ts+'</td><td>'+th+'</td>';
+h+='<td></td></tr>';
+h+='</tbody></table></div></div></div>';
+});
+el.innerHTML=h;
+}
+
+function tg(i){document.getElementById('b'+i).classList.toggle('o');document.getElementById('a'+i).classList.toggle('o')}
+function tghr(i){document.getElementById('hb'+i).classList.toggle('o');document.getElementById('ha'+i).classList.toggle('o')}
+function ta(view){
+if(view==='proj'){var bs=document.querySelectorAll('#projView .sb'),as=document.querySelectorAll('#projView .ar')}
+else if(view==='hr'){var bs=document.querySelectorAll('#hrView .sb'),as=document.querySelectorAll('#hrView .ar')}
+else{var bs=document.querySelectorAll('#roleView .sb'),as=document.querySelectorAll('#roleView .ar')}
+var io=[].slice.call(bs).some(function(b){return b.classList.contains('o')});
+bs.forEach(function(b){io?b.classList.remove('o'):b.classList.add('o')});
+as.forEach(function(a){io?a.classList.remove('o'):a.classList.add('o')});
+}
+function swNav(t){
+document.getElementById('ovView').style.display=t==='ov'?'':'none';
+document.getElementById('projView').style.display=t==='proj'?'':'none';
+document.getElementById('hrView').style.display=t==='hr'?'':'none';
+document.getElementById('roleView').style.display=t==='role'?'':'none';
+document.getElementById('navOv').className='nav-btn'+(t==='ov'?' active':'');
+document.getElementById('navProj').className='nav-btn'+(t==='proj'?' active':'');
+document.getElementById('navHr').className='nav-btn'+(t==='hr'?' active':'');
+document.getElementById('navRole').className='nav-btn'+(t==='role'?' active':'');
+}
+
+var hrColors={'candy':'#e74c3c','杨倩':'#3498db','小卫':'#f39c12','嘉绮':'#2ecc71','小滨':'#9b59b6','berry':'#1abc9c','10':'#fd79a8'};
+function rhr(){
+var hrMap={};
+P.forEach(function(p){p.r.forEach(function(r){
+var hr=r[11]||'未指定';if(!hr||hr==='-')hr='未指定';
+if(!hrMap[hr])hrMap[hr]={rows:[],color:hrColors[hr]||'#636e72'};
+hrMap[hr].rows.push({proj:p.n,group:r[0],dir:r[1],need:r[2],offer:r[3],pending:r[4],pg:r[5],first:r[6],second:r[7],hr2:r[8]});
+})});
+var hrList=Object.keys(hrMap).sort(function(a,b){
+var na=hrMap[a].rows.reduce(function(s,r){return s+r.need},0);
+var nb=hrMap[b].rows.reduce(function(s,r){return s+r.need},0);
+return nb-na;
+});
+var gtn=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[2]},0)},0);
+var gto=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[3]},0)},0);
+var avgPg=gtn>0?(gto/gtn*100):0;
+var el=document.getElementById('hrSec'),h='';
+hrList.forEach(function(hr,hi){
+var rows=hrMap[hr].rows;
+var tn=rows.reduce(function(s,r){return s+r.need},0);
+var to=rows.reduce(function(s,r){return s+r.offer},0);
+var tp=tn-to;
+var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tf=rows.reduce(function(s,r){return s+r.first},0);
+var ts=rows.reduce(function(s,r){return s+r.second},0);
+var th2=rows.reduce(function(s,r){return s+r.hr2},0);
+var projSet={};rows.forEach(function(r){projSet[r.proj]=1});
+var projCount=Object.keys(projSet).length;
+var warn=parseFloat(tpg)<avgPg;
+var warnHtml=warn?'<span class="warn-tag">⚠️ 需关注</span>':'<span class="ok-tag">✓ 正常</span>';
+var clr=hrMap[hr].color;
+var initials=hr.substring(0,1).toUpperCase();
+h+='<div class="sc" style="animation-delay:'+hi*.04+'s"><div class="sh" onclick="tghr('+hi+')"><div class="l"><div class="ic" style="background:'+clr+'">'+initials+'</div><div class="pn">'+hr+'</div>'+warnHtml+'</div>';
+h+='<div style="display:flex;align-items:center;gap:16px"><span style="font-size:13px;color:var(--text2)">负责项目 <b style="color:var(--text)">'+projCount+'</b></span>';
+h+='<span style="font-size:13px;color:var(--text2)">需求 <b style="color:var(--text)">'+tn+'</b></span>';
+h+='<span style="font-size:13px;color:var(--green)">OFFER <b>'+to+'</b></span>';
+h+='<span style="font-size:13px;color:var(--accent)">进度 <b>'+tpg+'%</b></span>';
+h+='<span class="ar" id="ha'+hi+'">&#9654;</span></div></div>';
+h+='<div class="ss"><span>待招 <b>'+tp+'</b></span><span>初试 <b>'+tf+'</b></span><span>复试 <b>'+ts+'</b></span><span>HR面试 <b>'+th2+'</b></span></div>';
+h+='<div class="sb" id="hb'+hi+'"><div class="tw"><table><thead><tr><th>项目</th><th>岗位/组</th><th style="min-width:140px">细分方向</th><th>需求数</th><th>OFFER</th><th>待招</th><th style="min-width:110px">进度</th><th>初试</th><th>复试</th><th>HR面试</th></tr></thead><tbody>';
+rows.forEach(function(r){
+var c2=pclr(r.pg);
+h+='<tr><td style="white-space:nowrap">'+r.proj+'</td><td>'+r.group+'</td><td><div class="dt">'+(r.dir||'-')+'</div></td>';
+h+='<td><b>'+r.need+'</b></td>';
+h+='<td style="color:var(--green);font-weight:600">'+r.offer+'</td>';
+h+='<td>'+r.pending+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+r.pg+'%;background:'+c2+'"></div></div><span style="font-size:11px;min-width:36px;color:'+c2+'">'+r.pg+'%</span></div></td>';
+h+='<td>'+r.first+'</td><td>'+r.second+'</td><td>'+r.hr2+'</td></tr>';
+});
+var sc2=pclr(parseFloat(tpg));
+h+='<tr style="background:rgba(79,140,255,.06);font-weight:700"><td>合计</td><td></td><td></td>';
+h+='<td style="color:var(--accent)">'+tn+'</td><td style="color:var(--green)">'+to+'</td><td>'+tp+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+tpg+'%;background:'+sc2+'"></div></div><span style="font-size:11px;color:'+sc2+'">'+tpg+'%</span></div></td>';
+h+='<td>'+tf+'</td><td>'+ts+'</td><td>'+th2+'</td></tr>';
+h+='</tbody></table></div></div></div>';
+});
+el.innerHTML=h;
+}
+
+rbar();rcharts();rsec();rhr();rrole();loadTrend();genInsights();
+
+function rrole(){
+var roleMap={};
+var roleColors={'策划':'#e74c3c','美术/设计':'#3498db','客户端':'#f39c12','服务器':'#2ecc71','项目管理':'#9b59b6','运营':'#1abc9c','引擎':'#74b9ff','质量':'#a29bfe','技术美术':'#00cec9','其他':'#636e72'};
+P.forEach(function(p){p.r.forEach(function(r){
+var k='其他';
+if(r[0].indexOf('策划')>=0)k='策划';
+else if(/美术|美宣|平面|动效|视觉|交互|导演/.test(r[0]))k='美术/设计';
+else if(r[0].indexOf('客户端')>=0)k='客户端';
+else if(r[0].indexOf('服务器')>=0)k='服务器';
+else if(/项目管理|PM/.test(r[0]))k='项目管理';
+else if(/运营|宣发|产品|数据研究|版本/.test(r[0]))k='运营';
+else if(r[0].indexOf('引擎')>=0)k='引擎';
+else if(/质量|测试/.test(r[0]))k='质量';
+else if(/技术美术|TA/.test(r[0]))k='技术美术';
+if(!roleMap[k])roleMap[k]={rows:[],color:roleColors[k]||'#636e72'};
+roleMap[k].rows.push({proj:p.n,group:r[0],dir:r[1],need:r[2],offer:r[3],pending:r[4],pg:r[5],first:r[6],second:r[7],hr2:r[8],hr:r[11]});
+})});
+var roleList=Object.keys(roleMap).sort(function(a,b){
+return roleMap[b].rows.reduce(function(s,r){return s+r.need},0)-roleMap[a].rows.reduce(function(s,r){return s+r.need},0);
+});
+var gtn=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[2]},0)},0);
+var gto=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[3]},0)},0);
+var avgPg=gtn>0?(gto/gtn*100):0;
+var el=document.getElementById('roleSec'),h='';
+var roleIcons={'策划':'策','美术/设计':'美','客户端':'端','服务器':'服','项目管理':'管','运营':'运','引擎':'擎','质量':'质','技术美术':'技','其他':'他'};
+roleList.forEach(function(role,ri){
+var rows=roleMap[role].rows;
+var tn=rows.reduce(function(s,r){return s+r.need},0);
+var to=rows.reduce(function(s,r){return s+r.offer},0);
+var tp=tn-to;
+var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tf=rows.reduce(function(s,r){return s+r.first},0);
+var ts=rows.reduce(function(s,r){return s+r.second},0);
+var th2=rows.reduce(function(s,r){return s+r.hr2},0);
+var projSet={};rows.forEach(function(r){projSet[r.proj]=1});
+var projCount=Object.keys(projSet).length;
+var warn=parseFloat(tpg)<avgPg;
+var warnHtml=warn?'<span class="warn-tag">⚠️ 需关注</span>':'<span class="ok-tag">✓ 正常</span>';
+var clr=roleMap[role].color;
+var ic=roleIcons[role]||'?';
+h+='<div class="sc" style="animation-delay:'+ri*.04+'s"><div class="sh" onclick="tgrole('+ri+')"><div class="l"><div class="ic" style="background:'+clr+'">'+ic+'</div><div class="pn">'+role+'</div>'+warnHtml+'</div>';
+h+='<div style="display:flex;align-items:center;gap:16px"><span style="font-size:13px;color:var(--text2)">覆盖项目 <b style="color:var(--text)">'+projCount+'</b></span>';
+h+='<span style="font-size:13px;color:var(--text2)">需求 <b style="color:var(--text)">'+tn+'</b></span>';
+h+='<span style="font-size:13px;color:var(--green)">OFFER <b>'+to+'</b></span>';
+h+='<span style="font-size:13px;color:var(--accent)">进度 <b>'+tpg+'%</b></span>';
+h+='<span class="ar" id="ra'+ri+'">&#9654;</span></div></div>';
+h+='<div class="ss"><span>待招 <b>'+tp+'</b></span><span>初试 <b>'+tf+'</b></span><span>复试 <b>'+ts+'</b></span><span>HR面试 <b>'+th2+'</b></span></div>';
+h+='<div class="sb" id="rb'+ri+'"><div class="tw"><table><thead><tr><th>项目</th><th>岗位/组</th><th style="min-width:140px">细分方向</th><th>需求数</th><th>OFFER</th><th>待招</th><th style="min-width:110px">进度</th><th>初试</th><th>复试</th><th>HR面试</th><th>负责HR</th></tr></thead><tbody>';
+rows.forEach(function(r){
+var c2=pclr(r.pg);
+h+='<tr><td style="white-space:nowrap">'+r.proj+'</td><td>'+r.group+'</td><td><div class="dt">'+(r.dir||'-')+'</div></td>';
+h+='<td><b>'+r.need+'</b></td>';
+h+='<td style="color:var(--green);font-weight:600">'+r.offer+'</td>';
+h+='<td>'+r.pending+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+r.pg+'%;background:'+c2+'"></div></div><span style="font-size:11px;min-width:36px;color:'+c2+'">'+r.pg+'%</span></div></td>';
+h+='<td>'+r.first+'</td><td>'+r.second+'</td><td>'+r.hr2+'</td>';
+h+='<td>'+(r.hr||'-')+'</td></tr>';
+});
+var sc2=pclr(parseFloat(tpg));
+h+='<tr style="background:rgba(79,140,255,.06);font-weight:700"><td>合计</td><td></td><td></td>';
+h+='<td style="color:var(--accent)">'+tn+'</td><td style="color:var(--green)">'+to+'</td><td>'+tp+'</td>';
+h+='<td><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div class="pb"><div class="f" style="width:'+tpg+'%;background:'+sc2+'"></div></div><span style="font-size:11px;color:'+sc2+'">'+tpg+'%</span></div></td>';
+h+='<td>'+tf+'</td><td>'+ts+'</td><td>'+th2+'</td><td></td></tr>';
+h+='</tbody></table></div></div></div>';
+});
+el.innerHTML=h;
+}
+function tgrole(i){document.getElementById('rb'+i).classList.toggle('o');document.getElementById('ra'+i).classList.toggle('o')}
+
+function genInsights(){
+// === 全局统计 ===
+var gtn=0,gto=0,gtf=0,gts=0,gth=0;
+P.forEach(function(p){p.r.forEach(function(r){gtn+=r[2];gto+=r[3];gtf+=r[6];gts+=r[7];gth+=r[8]})});
+var avgPg=gtn>0?(gto/gtn*100):0;
+var pipeline=gtf+gts+gth;
+var pipeRatio=gtn>0?(pipeline/gtn*100):0;
+var convRate=gtf>0?(gto/gtf*100):0;
+
+// === 按项目统计 ===
+var projStats=P.map(function(p){
+var tn=0,to=0,tf=0,ts=0,th=0;
+p.r.forEach(function(r){tn+=r[2];to+=r[3];tf+=r[6];ts+=r[7];th+=r[8]});
+return {n:p.n,need:tn,offer:to,rate:tn>0?(to/tn*100):0,first:tf,second:ts,hr:th,pipe:tf+ts+th};
+});
+projStats.sort(function(a,b){return b.need-a.need});
+
+// 0 offer项目
+var zeroOfferProj=projStats.filter(function(p){return p.offer===0&&p.need>0});
+// 高需求低进度
+var highRiskProj=projStats.filter(function(p){return p.need>=20&&p.rate<avgPg});
+// 面试流程总量为0的大项目
+var noPipeProj=projStats.filter(function(p){return p.need>=8&&p.pipe===0});
+// 表现好的
+var goodProj=projStats.filter(function(p){return p.rate>avgPg&&p.offer>0});
+
+// === 按职位统计 ===
+var roleMap={};
+P.forEach(function(p){p.r.forEach(function(r){
+var k='其他';
+if(r[0].indexOf('策划')>=0)k='策划';
+else if(/美术|美宣|平面|动效|视觉|交互|导演/.test(r[0]))k='美术/设计';
+else if(r[0].indexOf('客户端')>=0)k='客户端';
+else if(r[0].indexOf('服务器')>=0)k='服务器';
+else if(/项目管理|PM/.test(r[0]))k='项目管理';
+else if(/运营|宣发|产品|数据研究|版本/.test(r[0]))k='运营';
+else if(r[0].indexOf('引擎')>=0)k='引擎';
+else if(/质量|测试/.test(r[0]))k='质量';
+else if(/技术美术|TA/.test(r[0]))k='技术美术';
+if(!roleMap[k])roleMap[k]={need:0,offer:0,first:0,second:0,hr:0};
+roleMap[k].need+=r[2];roleMap[k].offer+=r[3];roleMap[k].first+=r[6];roleMap[k].second+=r[7];roleMap[k].hr+=r[8];
+})});
+var roleStats=Object.keys(roleMap).map(function(k){
+var d=roleMap[k];return {n:k,need:d.need,offer:d.offer,rate:d.need>0?(d.offer/d.need*100):0,first:d.first,second:d.second,hr:d.hr,pipe:d.first+d.second+d.hr};
+}).sort(function(a,b){return b.need-a.need});
+var zeroOfferRole=roleStats.filter(function(r){return r.offer===0&&r.need>0});
+var lowPipeRole=roleStats.filter(function(r){return r.need>=10&&r.pipe<r.need*0.5});
+
+// === 按HR统计 ===
+var hrMap={};
+P.forEach(function(p){p.r.forEach(function(r){
+var hr=r[11]||'未指定';if(!hr||hr==='-')hr='未指定';
+if(!hrMap[hr])hrMap[hr]={need:0,offer:0,first:0,second:0,hr2:0,projs:{}};
+hrMap[hr].need+=r[2];hrMap[hr].offer+=r[3];hrMap[hr].first+=r[6];hrMap[hr].second+=r[7];hrMap[hr].hr2+=r[8];
+hrMap[hr].projs[p.n]=1;
+})});
+var hrStats=Object.keys(hrMap).map(function(k){
+var d=hrMap[k];return {n:k,need:d.need,offer:d.offer,rate:d.need>0?(d.offer/d.need*100):0,first:d.first,second:d.second,hr2:d.hr2,projCount:Object.keys(d.projs).length,pipe:d.first+d.second+d.hr2};
+}).sort(function(a,b){return b.need-a.need});
+var avgHrNeed=hrStats.reduce(function(s,h){return s+h.need},0)/hrStats.length;
+var overloadHr=hrStats.filter(function(h){return h.need>avgHrNeed*1.5});
+var zeroOfferHr=hrStats.filter(function(h){return h.offer===0&&h.need>0});
+
+// =====================
+// 总览洞察
+// =====================
+var ovH='';
+ovH+='<div class="insight-card insight-overview"><div class="insight-title"><span class="tag-ov">📋</span> 概述</div><div class="insight-body">';
+ovH+='J3 工作室 27 届校招共 <b>13 个项目/中心</b>，总需求 <b class="hl-blue">'+gtn+'</b> 人，截至目前已发 OFFER <b class="hl-green">'+gto+'</b> 人，整体完成率 <b class="hl-orange">'+avgPg.toFixed(1)+'%</b>。';
+ovH+='当前面试流程中共有 <b>'+pipeline+'</b> 人（初试 '+gtf+'、复试 '+gts+'、HR面试 '+gth+'），';
+ovH+='面试流程总量覆盖率为 <b>'+(pipeRatio).toFixed(0)+'%</b>，';
+ovH+='初试到 OFFER 的转化率为 <b>'+(convRate).toFixed(1)+'%</b>。';
+if(goodProj.length>0){
+ovH+='<br>目前完成率领先的项目为：';
+goodProj.forEach(function(p,i){ovH+=(i>0?'、':'')+'<b class="hl-green">'+p.n+'</b>（'+p.rate.toFixed(1)+'%）'});
+ovH+='。';
+}
+ovH+='</div></div>';
+
+ovH+='<div class="insight-card insight-risk"><div class="insight-title"><span class="tag-risk">⚠️</span> 存在问题 / 风险点</div><div class="insight-body"><ul>';
+ovH+='<li><b>整体进度严重滞后</b>：完成率仅 <span class="hl-red">'+avgPg.toFixed(1)+'%</span>，311 个需求待招，距秋招高峰还需大幅提速。按当前转化率推算，面试流程中 '+pipeline+' 人全部转化也仅能新增约 '+(Math.round(pipeline*convRate/100))+' 个 OFFER，远不足以覆盖缺口。</li>';
+if(zeroOfferProj.length>0){
+ovH+='<li><b>'+zeroOfferProj.length+' 个项目零 OFFER</b>：';
+zeroOfferProj.forEach(function(p,i){ovH+=(i>0?'、':'')+p.n+'（需求'+p.need+'）'});
+ovH+='，需尽快启动或排查卡点。</li>';
+}
+if(noPipeProj.length>0){
+ovH+='<li><b>面试流程空缺</b>：';
+noPipeProj.forEach(function(p,i){ovH+=(i>0?'、':'')+p.n});
+ovH+=' 等项目需求量大但初试/复试/HR面试均为 0 或极少，简历来源或筛选环节可能存在瓶颈。</li>';
+}
+var bigRoleZero=zeroOfferRole.filter(function(r){return r.need>=15});
+if(bigRoleZero.length>0){
+ovH+='<li><b>大体量岗位类型零产出</b>：';
+bigRoleZero.forEach(function(r,i){ovH+=(i>0?'、':'')+r.n+'（需求'+r.need+'）'});
+ovH+='，需检查该类型候选人供给或面试安排。</li>';
+}
+ovH+='<li><b>面试漏斗转化率偏低</b>：初试 '+gtf+' 人，最终产出 OFFER 仅 '+gto+' 人（转化率 <span class="hl-red">'+(convRate).toFixed(1)+'%</span>），需分析各环节淘汰原因，优化筛选标准或面试效率。</li>';
+ovH+='</ul></div></div>';
+
+ovH+='<div class="insight-card insight-action"><div class="insight-title"><span class="tag-action">💡</span> 建议改进措施</div><div class="insight-body"><ul>';
+ovH+='<li><b>分级推进，聚焦重点</b>：优先攻克需求量最大的 Delta Force（76）、运营组（60）、逆战（49）三大项目，制定专项招聘计划，配备充足面试官资源。</li>';
+ovH+='<li><b>扩大简历来源</b>：对面试流程总量不足的项目（尤其美术类），建议拓展校园宣讲、行业竞赛、作品征集等渠道，同时加大社交媒体曝光力度。</li>';
+ovH+='<li><b>提升面试转化率</b>：当前初试到 OFFER 转化率仅 '+convRate.toFixed(1)+'%，建议复盘面试标准是否过严、面试官评价是否一致，必要时组织面试官校准会。</li>';
+ovH+='<li><b>设置双周节奏里程碑</b>：以每双周为一个冲刺周期，设置阶段性 OFFER 目标（建议每双周至少完成总需求的 8-10%），形成节奏感和紧迫感。</li>';
+ovH+='<li><b>预警机制执行</b>：对连续两个双周期完成率为 0 的项目/岗位，升级为 HR 负责人 + 业务负责人联合复盘，明确卡点和解决方案。</li>';
+ovH+='</ul></div></div>';
+document.getElementById('insightOverview').innerHTML=ovH;
+
+// =====================
+// 按项目洞察
+// =====================
+var projH='<div class="insight-section"><div class="insight-section-title">🧠 项目维度洞察</div>';
+projH+='<div class="insight-card insight-overview"><div class="insight-title"><span class="tag-ov">📋</span> 概述</div><div class="insight-body">';
+projH+='共 <b>13 个项目/中心</b>参与校招。需求量 TOP3 为 <b class="hl-blue">Delta Force（76）</b>、<b class="hl-blue">运营组（60）</b>、<b class="hl-blue">逆战（49）</b>，三者合计占总需求的 <b>'+(((76+60+49)/gtn)*100).toFixed(0)+'%</b>。';
+if(goodProj.length>0){
+projH+='进度领先的有：';
+goodProj.sort(function(a,b){return b.rate-a.rate});
+goodProj.forEach(function(p,i){projH+=(i>0?'、':'')+'<b class="hl-green">'+p.n+'</b>（'+p.rate.toFixed(1)+'%）'});
+projH+='。';
+}
+projH+='其余项目进度均低于平均水平或为零。';
+projH+='</div></div>';
+
+projH+='<div class="insight-card insight-risk"><div class="insight-title"><span class="tag-risk">⚠️</span> 存在问题 / 风险点</div><div class="insight-body"><ul>';
+// 大项目风险
+highRiskProj.forEach(function(p){
+projH+='<li><b>'+p.n+'</b>：需求 <b>'+p.need+'</b> 人，仅完成 <span class="hl-red">'+p.rate.toFixed(1)+'%</span>，';
+if(p.pipe===0)projH+='且面试流程总量为零，招聘流程尚未有效启动。';
+else if(p.pipe<p.need*0.3)projH+='面试流程总量仅 '+p.pipe+' 人，远不足以覆盖缺口。';
+else projH+='面试流程总量有 '+p.pipe+' 人，但转化效率需提升。';
+projH+='</li>';
+});
+// 特殊风险
+var hasSmallZero=zeroOfferProj.filter(function(p){return p.need<20&&p.need>=4});
+if(hasSmallZero.length>0){
+projH+='<li><b>中小型项目同样停滞</b>：';
+hasSmallZero.forEach(function(p,i){projH+=(i>0?'、':'')+p.n+'（'+p.need+'）'});
+projH+='，虽需求量不大但长期零产出值得关注。</li>';
+}
+projH+='</ul></div></div>';
+
+projH+='<div class="insight-card insight-action"><div class="insight-title"><span class="tag-action">💡</span> 建议改进措施</div><div class="insight-body"><ul>';
+projH+='<li><b>Delta Force 专项攻坚</b>：76 个需求占全局 23%，建议设立专项招聘小组，美术岗（34个需求）可联合校园美术类竞赛/作品展进行定向挖掘。</li>';
+projH+='<li><b>运营组分批排期</b>：60 个需求涉及 11 个子方向，建议按留用计划优先级排序，先攻 DF 产品运营（已有面试进展和 1 OFFER）、CODM 组等有基础的方向。</li>';
+projH+='<li><b>零面试量项目紧急启动</b>：体验设计组、宣发设计组、引擎技术组等面试量极低，建议 HR 牵头与业务方确认面试官排期和简历投递情况。</li>';
+projH+='<li><b>标杆项目经验复制</b>：质量管理组（50%完成率）和 C-Game 客户端组（75%完成率）表现突出，建议萃取其面试效率和候选人画像经验，推广到其他项目。</li>';
+projH+='</ul></div></div>';
+projH+='</div>';
+document.getElementById('insightProj').innerHTML=projH;
+
+// =====================
+// 按职位洞察
+// =====================
+var roleH='<div class="insight-section"><div class="insight-section-title">🧠 职位维度洞察</div>';
+roleH+='<div class="insight-card insight-overview"><div class="insight-title"><span class="tag-ov">📋</span> 概述</div><div class="insight-body">';
+roleH+='校招需求覆盖 <b>'+roleStats.length+' 个岗位类型</b>。需求量排名：';
+roleStats.slice(0,5).forEach(function(r,i){
+roleH+=(i>0?'、':'')+'<b>'+r.n+'</b>（'+r.need+'）';
+});
+roleH+='。';
+var hasOfferRoles=roleStats.filter(function(r){return r.offer>0});
+if(hasOfferRoles.length>0){
+roleH+='目前仅 <b>'+hasOfferRoles.length+' 个岗位类型</b>有 OFFER 产出：';
+hasOfferRoles.forEach(function(r,i){roleH+=(i>0?'、':'')+'<b class="hl-green">'+r.n+'</b>（'+r.offer+' OFFER，'+r.rate.toFixed(1)+'%）'});
+roleH+='。';
+}
+roleH+='</div></div>';
+
+roleH+='<div class="insight-card insight-risk"><div class="insight-title"><span class="tag-risk">⚠️</span> 存在问题 / 风险点</div><div class="insight-body"><ul>';
+var artRole=roleStats.filter(function(r){return r.n==='美术/设计'})[0];
+if(artRole){
+roleH+='<li><b>美术/设计岗是最大瓶颈</b>：需求 <b>'+artRole.need+'</b> 人（占总量 '+(artRole.need/gtn*100).toFixed(0)+'%），但 OFFER 仅 '+artRole.offer+' 人，面试流程总量仅 '+artRole.pipe+' 人。';
+roleH+='多数美术组初试/复试为 0，<span class="hl-red">简历供给严重不足</span>，是当前最紧迫的招聘瓶颈。</li>';
+}
+var opsRole=roleStats.filter(function(r){return r.n==='运营'})[0];
+if(opsRole){
+roleH+='<li><b>运营岗体量大但启动慢</b>：需求 '+opsRole.need+' 人，OFFER 仅 '+opsRole.offer+' 人（'+opsRole.rate.toFixed(1)+'%），虽有一定面试流程总量（'+opsRole.pipe+'人在面试），但覆盖率低。</li>';
+}
+var pmRole=roleStats.filter(function(r){return r.n==='项目管理'})[0];
+if(pmRole){
+roleH+='<li><b>项目管理岗零产出</b>：需求 '+pmRole.need+' 人，0 OFFER，面试流程总量 '+pmRole.pipe+' 人，转化效率堪忧。</li>';
+}
+var engRole=roleStats.filter(function(r){return r.n==='引擎'})[0];
+if(engRole&&engRole.pipe===0){
+roleH+='<li><b>引擎岗完全停滞</b>：需求 '+engRole.need+' 人，0 OFFER 且面试流程总量为零，需紧急排查岗位 JD 和候选人来源。</li>';
+}
+roleH+='</ul></div></div>';
+
+roleH+='<div class="insight-card insight-action"><div class="insight-title"><span class="tag-action">💡</span> 建议改进措施</div><div class="insight-body"><ul>';
+roleH+='<li><b>美术岗专项突破</b>：建议联合八大美院、CG 类院校开展定向招聘宣讲；在 ArtStation、站酷等平台发起校招作品征集；缩短美术面试周期，采用作品集初筛+线上面试模式。</li>';
+roleH+='<li><b>客户端/服务器岗加速推进</b>：目前客户端有一定面试基础（初试量较高），建议提升复试和 HR 面试的排期效率，缩短候选人等待时间。</li>';
+roleH+='<li><b>运营岗分层招聘</b>：运营子方向多、差异大，建议按「核心运营→内容运营→职能运营」优先级分层推进，集中资源打透单个方向。</li>';
+roleH+='<li><b>稀缺岗位提前锁定</b>：技术美术、引擎等市场供给稀缺的岗位，建议提前启动寒假实习转正、实验室定向合作等渠道，不应完全依赖常规校招流程。</li>';
+roleH+='</ul></div></div>';
+roleH+='</div>';
+document.getElementById('insightRole').innerHTML=roleH;
+
+// =====================
+// 按HR洞察
+// =====================
+var hrH='<div class="insight-section"><div class="insight-section-title">🧠 HR 维度洞察</div>';
+hrH+='<div class="insight-card insight-overview"><div class="insight-title"><span class="tag-ov">📋</span> 概述</div><div class="insight-body">';
+hrH+='共 <b>'+hrStats.length+' 位 HR</b> 参与校招对接。人均负责需求 <b>'+Math.round(avgHrNeed)+'</b> 个。';
+hrH+='负责量 TOP3：';
+hrStats.slice(0,3).forEach(function(h,i){
+hrH+=(i>0?'、':'')+'<b class="hl-blue">'+h.n+'</b>（'+h.need+' 需求，'+h.projCount+' 个项目）';
+});
+hrH+='。';
+var bestHr=hrStats.filter(function(h){return h.offer>0}).sort(function(a,b){return b.rate-a.rate});
+if(bestHr.length>0){
+hrH+='目前有 OFFER 产出的 HR：';
+bestHr.forEach(function(h,i){hrH+=(i>0?'、':'')+'<b class="hl-green">'+h.n+'</b>（'+h.offer+' OFFER，'+h.rate.toFixed(1)+'%）'});
+hrH+='。';
+}
+hrH+='</div></div>';
+
+hrH+='<div class="insight-card insight-risk"><div class="insight-title"><span class="tag-risk">⚠️</span> 存在问题 / 风险点</div><div class="insight-body"><ul>';
+if(overloadHr.length>0){
+overloadHr.forEach(function(h){
+hrH+='<li><b>'+h.n+' 工作负载过高</b>：负责 <b>'+h.need+'</b> 个需求（平均值的 '+Math.round(h.need/avgHrNeed*100)+'%），覆盖 '+h.projCount+' 个项目';
+if(h.rate<avgPg)hrH+='，但完成率仅 <span class="hl-red">'+h.rate.toFixed(1)+'%</span>，可能因精力分散影响招聘效率';
+hrH+='。</li>';
+});
+}
+if(zeroOfferHr.length>0){
+hrH+='<li><b>'+zeroOfferHr.length+' 位 HR 暂无 OFFER 产出</b>：';
+zeroOfferHr.forEach(function(h,i){hrH+=(i>0?'、':'')+h.n+'（'+h.need+'需求）'});
+hrH+='。需排查是简历不足、面试排期问题还是候选人拒绝等原因。</li>';
+}
+// 分析面试流程总量不均衡
+var lowPipeHr=hrStats.filter(function(h){return h.need>=20&&h.pipe<h.need*0.3});
+if(lowPipeHr.length>0){
+hrH+='<li><b>面试流程总量不足</b>：';
+lowPipeHr.forEach(function(h,i){hrH+=(i>0?'、':'')+h.n+'（面试流程总量 '+h.pipe+'/需求 '+h.need+'）'});
+hrH+='，面试量远不足以支撑目标完成。</li>';
+}
+hrH+='</ul></div></div>';
+
+hrH+='<div class="insight-card insight-action"><div class="insight-title"><span class="tag-action">💡</span> 建议改进措施</div><div class="insight-body"><ul>';
+if(overloadHr.length>0){
+hrH+='<li><b>重新均衡 HR 工作量</b>：'+overloadHr.map(function(h){return h.n}).join('、')+' 负责需求远超平均水平，建议将部分项目的 HR 对接分流给负载较低的同事，或临时增加 HRBP 支持。</li>';
+}
+hrH+='<li><b>建立 HR 周报机制</b>：每位 HR 每周更新各项目的简历投递量、面试安排量、OFFER 量，及时暴露问题。对连续两周无进展的项目升级处理。</li>';
+hrH+='<li><b>HR 之间共享优秀候选人</b>：建立候选人内部推荐机制，当某 HR 对接的项目收到不匹配但优秀的候选人时，可流转到其他 HR 负责的匹配项目。</li>';
+hrH+='<li><b>设置里程碑激励</b>：为每位 HR 设定双周 OFFER 目标，达标给予正向反馈，推动招聘节奏感。</li>';
+hrH+='</ul></div></div>';
+hrH+='</div>';
+document.getElementById('insightHr').innerHTML=hrH;
+}
+function refreshData(){var t=document.getElementById('toast');t.style.display='block';setTimeout(function(){t.style.display='none'},4000)}
+
+function swTrend(t){
+document.getElementById('trendAll').style.display=t==='all'?'':'none';
+document.getElementById('trendRole').style.display=t==='role'?'':'none';
+document.getElementById('trendProj').style.display=t==='proj'?'':'none';
+document.getElementById('ttAll').className='trend-tab'+(t==='all'?' active':'');
+document.getElementById('ttRole').className='trend-tab'+(t==='role'?' active':'');
+document.getElementById('ttProj').className='trend-tab'+(t==='proj'?' active':'');
+}
+
+var trendColors=['#4f8cff','#00d68f','#ffaa00','#ff4757','#6c5ce7','#1abc9c','#fd79a8','#74b9ff','#a29bfe','#00cec9','#e67e22','#636e72','#e74c3c'];
+
+function drawLine(canvasId, history, keyFn, labelFn, colorList){
+var cv=document.getElementById(canvasId);
+if(!cv)return;
+var ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
+var W=cv.parentElement.offsetWidth||800,H=320;
+cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';
+ctx.scale(dpr,dpr);
+
+var dates=history.map(function(h){return h.date});
+var series=keyFn(history);
+// series = [{label, data:[rate,rate,...], color}]
+
+var pad={t:30,r:20,b:50,l:50};
+var cw=W-pad.l-pad.r, ch=H-pad.t-pad.b;
+
+// Find max rate
+var maxR=10;
+series.forEach(function(s){s.data.forEach(function(v){if(v>maxR)maxR=v})});
+maxR=Math.ceil(maxR/10)*10;if(maxR<10)maxR=10;
+
+// Grid
+ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+for(var i=0;i<=5;i++){
+var y=pad.t+ch-ch*(i/5);
+ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+ctx.fillStyle='var(--text2)';ctx.fillStyle='#9498a8';ctx.font='11px sans-serif';ctx.textAlign='right';ctx.textBaseline='middle';
+ctx.fillText((maxR*i/5).toFixed(0)+'%',pad.l-8,y);
+}
+
+// X labels
+ctx.textAlign='center';ctx.textBaseline='top';
+dates.forEach(function(d,i){
+var x=pad.l+(dates.length===1?cw/2:cw*i/(dates.length-1));
+ctx.fillStyle='#9498a8';ctx.font='11px sans-serif';
+ctx.fillText(d.substring(5),x,pad.t+ch+8);
+});
+
+// Lines
+series.forEach(function(s,si){
+ctx.strokeStyle=s.color;ctx.lineWidth=2.5;ctx.lineJoin='round';
+ctx.beginPath();
+s.data.forEach(function(v,i){
+var x=pad.l+(dates.length===1?cw/2:cw*i/(dates.length-1));
+var y=pad.t+ch-ch*(v/maxR);
+if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+});
+ctx.stroke();
+
+// Dots
+s.data.forEach(function(v,i){
+var x=pad.l+(dates.length===1?cw/2:cw*i/(dates.length-1));
+var y=pad.t+ch-ch*(v/maxR);
+ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill();
+ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();
+
+// Value label
+ctx.fillStyle=s.color;ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.textBaseline='bottom';
+ctx.fillText(v.toFixed(1)+'%',x,y-8);
+});
+});
+
+// Legend (for multi-series)
+if(series.length>1){
+var lx=pad.l,ly=H-12;
+ctx.font='11px sans-serif';ctx.textBaseline='middle';
+series.forEach(function(s){
+ctx.fillStyle=s.color;
+ctx.beginPath();ctx.arc(lx+5,ly,4,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='#9498a8';ctx.textAlign='left';
+ctx.fillText(s.label,lx+13,ly);
+lx+=ctx.measureText(s.label).width+28;
+});
+}
+}
+
+function loadTrend(){
+fetch('history.json').then(function(r){return r.json()}).then(function(history){
+// Total trend
+drawLine('trendCanvasAll',history,function(h){
+return [{label:'总完成率',data:h.map(function(d){return d.total.rate}),color:'#4f8cff'}];
+});
+
+// By role trend
+drawLine('trendCanvasRole',history,function(h){
+var roles=Object.keys(h[0].byRole);
+return roles.map(function(r,i){
+return {label:r,data:h.map(function(d){return d.byRole[r]?d.byRole[r].rate:0}),color:trendColors[i%trendColors.length]};
+});
+});
+
+// By project trend
+drawLine('trendCanvasProj',history,function(h){
+var projs=Object.keys(h[0].byProject);
+return projs.map(function(p,i){
+return {label:p.replace('项目组','').replace('组',''),data:h.map(function(d){return d.byProject[p]?d.byProject[p].rate:0}),color:trendColors[i%trendColors.length]};
+});
+});
+}).catch(function(e){console.log('No history data yet:',e)});
+}
+</script>
+</body>
+</html>

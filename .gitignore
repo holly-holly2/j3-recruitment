@@ -1,0 +1,5 @@
+.workbuddy/
+*.zip
+*.py
+sheet_content.txt
+.DS_Store

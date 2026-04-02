@@ -272,7 +272,9 @@ s.forEach(function(p){
 var t=p.r.reduce(function(s,r){return s+r[2]},0);
 var o=p.r.reduce(function(s,r){return s+r[3]},0);
 var w=(t/mx*100).toFixed(1);
-h+='<div class="br"><div class="bl" title="'+p.n+'">'+p.n+'</div><div class="bt"><div class="bf" style="width:'+w+'%;background:'+p.c+'">'+t+'</div></div><div style="width:80px;font-size:13px;font-weight:600;color:var(--green);text-align:right">'+o+' OFFER</div></div>';
+var rate=t>0?(o/t*100).toFixed(1):'0.0';
+var rclr=parseFloat(rate)>=50?'var(--green)':parseFloat(rate)>=10?'var(--orange)':'var(--text2)';
+h+='<div class="br"><div class="bl" title="'+p.n+'">'+p.n+'</div><div class="bt"><div class="bf" style="width:'+w+'%;background:'+p.c+'">'+t+'</div></div><div style="min-width:160px;font-size:13px;font-weight:600;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:8px"><span style="color:var(--green)">'+o+' OFFER</span><span style="color:'+rclr+'">'+rate+'%</span></div></div>';
 });
 el.innerHTML=h;
 }

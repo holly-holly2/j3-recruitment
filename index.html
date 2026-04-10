@@ -123,7 +123,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
   <div id="ovView">
     <div class="kpi-grid">
       <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">328</div><div class="kpi-sub">13 个项目/中心</div></div>
-      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">17</div><div class="kpi-sub">占比 5.18%</div></div>
+      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">17</div><div class="kpi-sub">占比 5.18%</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 2</div></div>
       <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">311</div><div class="kpi-sub">剩余 94.82%</div></div>
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">240</div><div class="kpi-sub">复试 39 · HR面试 14</div></div>
     </div>
@@ -881,7 +881,10 @@ function updateKPI() {
   var gtf = P.reduce(function(s, p) { return s + p.r.reduce(function(s2, r) { return s2 + r[6]; }, 0); }, 0);
   var gts = P.reduce(function(s, p) { return s + p.r.reduce(function(s2, r) { return s2 + r[7]; }, 0); }, 0);
   var gth = P.reduce(function(s, p) { return s + p.r.reduce(function(s2, r) { return s2 + r[8]; }, 0); }, 0);
-  var gtp = gtn - gto;
+  // 额外录用：OFFER超出需求的部分
+  var extraOffer = 0;
+  P.forEach(function(p) { p.r.forEach(function(r) { if (r[3] > r[2]) extraOffer += (r[3] - r[2]); }); });
+  var gtp = gtn - (gto - extraOffer);
   var rate = gtn > 0 ? (gto / gtn * 100) : 0;
   var pipeline = gtf + gts + gth;
   
@@ -893,9 +896,11 @@ function updateKPI() {
     
     kpiCards[1].querySelector('.kpi-value').textContent = gto;
     kpiCards[1].querySelector('.kpi-sub').textContent = '占比 ' + rate.toFixed(2) + '%';
+    var extraEl = kpiCards[1].querySelector('.kpi-extra');
+    if (extraEl) extraEl.textContent = extraOffer > 0 ? '额外录用 ' + extraOffer : '';
     
     kpiCards[2].querySelector('.kpi-value').textContent = gtp;
-    kpiCards[2].querySelector('.kpi-sub').textContent = '剩余 ' + (100 - rate).toFixed(2) + '%';
+    kpiCards[2].querySelector('.kpi-sub').textContent = '剩余 ' + (gtn > 0 ? (gtp / gtn * 100).toFixed(2) : 0) + '%';
     
     kpiCards[3].querySelector('.kpi-value').textContent = gtf;
     kpiCards[3].querySelector('.kpi-sub').textContent = '复试 ' + gts + ' · HR面试 ' + gth;

@@ -1,31 +1,233 @@
 [
   {
     "date": "2026-03-31",
-    "total": {"need": 328, "offer": 17, "pending": 311, "rate": 5.18},
+    "total": {
+      "need": 328,
+      "offer": 17,
+      "pending": 311,
+      "rate": 5.18
+    },
     "byRole": {
-      "美术/设计": {"need": 135, "offer": 5, "rate": 3.70},
-      "运营": {"need": 60, "offer": 1, "rate": 1.67},
-      "策划": {"need": 69, "offer": 2, "rate": 2.90},
-      "客户端": {"need": 46, "offer": 11, "rate": 23.91},
-      "服务器": {"need": 28, "offer": 0, "rate": 0},
-      "项目管理": {"need": 16, "offer": 0, "rate": 0},
-      "引擎": {"need": 8, "offer": 0, "rate": 0},
-      "质量": {"need": 4, "offer": 2, "rate": 50.00},
-      "技术美术": {"need": 4, "offer": 0, "rate": 0}
+      "美术/设计": {
+        "need": 135,
+        "offer": 5,
+        "rate": 3.7
+      },
+      "运营": {
+        "need": 60,
+        "offer": 1,
+        "rate": 1.67
+      },
+      "策划": {
+        "need": 69,
+        "offer": 2,
+        "rate": 2.9
+      },
+      "客户端": {
+        "need": 46,
+        "offer": 11,
+        "rate": 23.91
+      },
+      "服务器": {
+        "need": 28,
+        "offer": 0,
+        "rate": 0
+      },
+      "项目管理": {
+        "need": 16,
+        "offer": 0,
+        "rate": 0
+      },
+      "引擎": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0
+      },
+      "质量": {
+        "need": 4,
+        "offer": 2,
+        "rate": 50.0
+      },
+      "技术美术": {
+        "need": 4,
+        "offer": 0,
+        "rate": 0
+      }
     },
     "byProject": {
-      "逆战项目组": {"need": 49, "offer": 4, "rate": 8.16},
-      "C-Game项目组": {"need": 34, "offer": 3, "rate": 8.82},
-      "Delta Force项目组": {"need": 76, "offer": 6, "rate": 7.89},
-      "穿越火线手游项目组": {"need": 31, "offer": 0, "rate": 0},
-      "CFH项目组": {"need": 42, "offer": 1, "rate": 2.38},
-      "体验设计组": {"need": 10, "offer": 0, "rate": 0},
-      "宣发设计组": {"need": 8, "offer": 0, "rate": 0},
-      "技术美术组": {"need": 4, "offer": 0, "rate": 0},
-      "综合管理组": {"need": 2, "offer": 0, "rate": 0},
-      "运营组": {"need": 60, "offer": 1, "rate": 1.67},
-      "引擎技术组": {"need": 8, "offer": 0, "rate": 0},
-      "质量管理组": {"need": 4, "offer": 2, "rate": 50.00}
+      "逆战项目组": {
+        "need": 49,
+        "offer": 4,
+        "rate": 8.16
+      },
+      "C-Game项目组": {
+        "need": 34,
+        "offer": 3,
+        "rate": 8.82
+      },
+      "Delta Force项目组": {
+        "need": 76,
+        "offer": 6,
+        "rate": 7.89
+      },
+      "穿越火线手游项目组": {
+        "need": 31,
+        "offer": 0,
+        "rate": 0
+      },
+      "CFH项目组": {
+        "need": 42,
+        "offer": 1,
+        "rate": 2.38
+      },
+      "体验设计组": {
+        "need": 10,
+        "offer": 0,
+        "rate": 0
+      },
+      "宣发设计组": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0
+      },
+      "技术美术组": {
+        "need": 4,
+        "offer": 0,
+        "rate": 0
+      },
+      "综合管理组": {
+        "need": 2,
+        "offer": 0,
+        "rate": 0
+      },
+      "运营组": {
+        "need": 60,
+        "offer": 1,
+        "rate": 1.67
+      },
+      "引擎技术组": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0
+      },
+      "质量管理组": {
+        "need": 4,
+        "offer": 2,
+        "rate": 50.0
+      }
+    }
+  },
+  {
+    "date": "2026-04-10",
+    "total": {
+      "need": 327,
+      "offer": 63,
+      "pending": 266,
+      "rate": 19.27
+    },
+    "byRole": {
+      "策划": {
+        "need": 53,
+        "offer": 11,
+        "rate": 20.75
+      },
+      "美术/设计": {
+        "need": 125,
+        "offer": 18,
+        "rate": 14.4
+      },
+      "客户端": {
+        "need": 42,
+        "offer": 15,
+        "rate": 35.71
+      },
+      "服务器": {
+        "need": 22,
+        "offer": 6,
+        "rate": 27.27
+      },
+      "项目管理": {
+        "need": 13,
+        "offer": 2,
+        "rate": 15.38
+      },
+      "运营": {
+        "need": 60,
+        "offer": 8,
+        "rate": 13.33
+      },
+      "引擎": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0.0
+      },
+      "质量": {
+        "need": 4,
+        "offer": 3,
+        "rate": 75.0
+      }
+    },
+    "byProject": {
+      "逆战项目组": {
+        "need": 49,
+        "offer": 11,
+        "rate": 22.45
+      },
+      "C-Game项目组": {
+        "need": 34,
+        "offer": 5,
+        "rate": 14.71
+      },
+      "Delta Force项目组": {
+        "need": 75,
+        "offer": 22,
+        "rate": 29.33
+      },
+      "穿越火线手游项目组": {
+        "need": 31,
+        "offer": 6,
+        "rate": 19.35
+      },
+      "CFH项目组": {
+        "need": 42,
+        "offer": 2,
+        "rate": 4.76
+      },
+      "体验设计组": {
+        "need": 10,
+        "offer": 2,
+        "rate": 20.0
+      },
+      "宣发设计组": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0.0
+      },
+      "技术美术组": {
+        "need": 4,
+        "offer": 3,
+        "rate": 75.0
+      },
+      "综合管理组": {
+        "need": 2,
+        "offer": 1,
+        "rate": 50.0
+      },
+      "运营组": {
+        "need": 60,
+        "offer": 8,
+        "rate": 13.33
+      },
+      "引擎技术组": {
+        "need": 8,
+        "offer": 0,
+        "rate": 0.0
+      },
+      "质量管理组": {
+        "need": 4,
+        "offer": 3,
+        "rate": 75.0
+      }
     }
   }
 ]

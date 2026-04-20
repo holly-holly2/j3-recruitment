@@ -104,10 +104,10 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
   <div style="display:flex;align-items:flex-start;justify-content:space-between">
     <div>
       <h1>J3-27届校招进展</h1>
-      <p>数据统计截至 2026.04.10 · 共 13 个项目/中心 · 总需求数 327</p>
+      <p>数据统计截至 2026.04.20 · 共 12 个项目/中心 · 总需求数 327</p>
     </div>
     <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
-      <span style="font-size:12px;color:var(--text2)">🕐 上次更新：2026-04-10 17:28</span>
+      <span style="font-size:12px;color:var(--text2)">🕐 上次更新：2026-04-20 12:00</span>
       <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
     </div>
   </div>
@@ -123,11 +123,11 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
   <div id="ovView">
     <div class="kpi-grid">
       <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">328</div><div class="kpi-sub">13 个项目/中心</div></div>
-      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">17</div><div class="kpi-sub">占比 5.18%</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 2</div></div>
+      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">17</div><div class="kpi-sub">完成率 5.18%</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 2</div></div>
       <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">311</div><div class="kpi-sub">剩余 94.82%</div></div>
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">240</div><div class="kpi-sub">复试 39 · HR面试 14</div></div>
     </div>
-    <div class="bcs"><h3>📊 各项目需求数排行</h3><div id="bc"></div></div>
+    <div class="bcs"><h3>📊 各项目需求&进展</h3><div id="bc"></div></div>
     <div class="cg">
       <div class="cc"><h3>🥧 项目组需求占比</h3><canvas id="pc" width="300" height="300"></canvas></div>
       <div class="cc"><h3>👥 岗位类型需求分布</h3><canvas id="rc" width="300" height="300"></canvas></div>
@@ -176,89 +176,90 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
 <script>
 var P=[
 {n:"逆战项目组",ic:"NZ",c:"#e74c3c",r:[
-["策划组","内容*5、战斗*3、数值*2、商业化*3",13,3,10,23,18,3,5,"","","杨倩","",""],
-["美术组","3D:动作*2、场景*3、特效*2、角色*5<br>2D:商业化角色*1、怪*1、武器*1",18,3,15,17,4,1,3,"","","小卫","",""],
-["客户端组","战斗-武器*1、战斗-3C/动画*1、战斗-怪物*1、玩法*2、系统*3、效能*1、性能*1",10,3,7,30,28,5,3,"","","杨倩","",""],
-["服务器组","/",6,2,4,33,12,0,2,"","","杨倩","",""],
-["项目管理组","/",2,0,2,0,14,3,1,"","","杨倩","",""]
+["策划组","内容*5、战斗*3、数值*2、商业化*3",13,4,9,31,20,5,5,"","","杨倩","",""],
+["美术组","3D:动作*2、场景*3、特效*2、角色*5<br>2D:商业化角色*1、怪*1、武器*1",18,4,14,22,3,3,3,"","","小卫","",""],
+["客户端组","战斗-武器*1、战斗-3C/动画*1、战斗-怪物*1、玩法*2、系统*3、效能*1、性能*1",10,3,7,30,29,5,3,"","","杨倩","",""],
+["服务器组","/",6,2,4,33,12,1,4,"","","杨倩","",""],
+["项目管理组","/",2,1,1,50,14,4,1,"","","杨倩","",""],
 ]},
 
 {n:"C-Game项目组",ic:"CG",c:"#3498db",r:[
-["策划组","系统、玩法、关卡各2",6,1,5,17,21,7,1,"","","小卫","",""],
-["美术组","2D场景/2D武器/3D场景/3D角色/特效/动画各3",18,0,18,0,1,1,2,"","","小卫","",""],
-["客户端组","系统2，玩法2",4,1,3,25,8,4,2,"","","小卫","",""],
+["策划组","系统、玩法、关卡各2",6,1,5,17,34,13,1,"","","小卫","",""],
+["美术组","2D场景/2D武器/3D场景/3D角色/特效/动画各3",18,1,17,6,5,1,1,"","","小卫","",""],
+["客户端组","系统2，玩法2",4,1,3,25,7,3,2,"","","小卫","",""],
 ["服务器组","",3,2,1,67,24,1,2,"","","小卫","",""],
-["项目管理组","",3,1,2,33,9,1,1,"","","小卫","",""]
+["项目管理组","",3,1,2,33,9,1,1,"","","小卫","",""],
 ]},
 
 {n:"Delta Force项目组",ic:"DF",c:"#f39c12",r:[
-["策划组","系统3、商业化3、叙事3、战斗3、关卡2、海外2",16,4,12,25,13,6,0,"","","candy","",""],
-["美术组","场景原画*2；美宣*2；角色原画*3；武器原画*3；3D场景*6；3D角色*4；3D武器*4；3D动作*4；演绎动画*2；技术美术*2；特效*2",34,10,24,29,26,4,9,"","","小卫","",""],
-["客户端组","系统2，玩法8，上海6",16,8,8,50,38,9,7,"","","嘉绮","",""],
-["服务器组","系统4，AI2",6,0,6,0,16,0,0,"","","嘉绮","",""],
-["项目管理组","版本*2、APM*2",3,0,3,0,1,0,0,"","","小滨","",""]
+["策划组","系统3、商业化3、叙事3、战斗3、关卡2、海外2",16,4,12,25,21,8,0,"","","candy","",""],
+["美术组","场景原画*2<br>美宣*2<br>角色原画*3<br>武器原画*3<br>3D场景*6<br>3D角色*4<br>3D武器*4<br>3D动作*4<br>演绎动画*2<br>技术美术*2<br>特效*2",34,15,19,44,29,4,7,"","","小卫","",""],
+["客户端组","系统2，玩法8，上海6",16,8,8,50,35,9,9,"","","嘉绮","",""],
+["服务器组","系统4，AI2",6,0,6,0,24,0,0,"","","嘉绮","",""],
+["项目管理组","版本*2、APM*2",3,0,3,0,6,0,0,"","","小滨","",""],
 ]},
 
 {n:"穿越火线手游项目组",ic:"CF",c:"#2ecc71",r:[
-["策划组","武器、系统、商业*1<br>关卡*3",6,2,4,33,14,1,3,"","","berry","",""],
-["美术组","3D角色:3/3D武器:2/3D场景:2/3D动作:2/3D特效:2/原画:4",15,0,15,0,10,0,0,"","","berry","",""],
-["客户端组","gameplay/系统/引擎各1，好苗子可再录",4,2,2,50,46,1,2,"","","10","",""],
-["服务器组","3个系统、1个算法",4,2,2,50,40,13,5,"","","10","",""],
-["项目管理组","1个美术PM 1个版本PM",2,0,2,0,0,0,0,"","","berry","",""]
+["策划组","武器、系统、商业*1关卡*3",6,2,4,33,15,4,2,"","","berry","",""],
+["美术组","3d角色:3/3d武器:2/3d场景:2/3D动作:2/3D特效:2/原画:4",15,1,14,7,7,3,0,"","","berry","",""],
+["客户端组","gameplay 系统 引擎各1，另外有好苗子可以再录",4,1,3,25,47,0,2,"","","10","",""],
+["服务器组","3个系统、1个算法",4,3,1,75,44,19,5,"","","10","",""],
+["项目管理组","1个美术PM 1个版本PM",2,0,2,0,0,0,0,"","","berry","",""],
 ]},
 
-{n:"CFH项目组",ic:"CH",c:"#9b59b6",r:[
-["策划组","关卡2、怪物2、玩法1、数值1、系统活跃1、商业化1、武器1、3C1、任务1、叙事1",12,1,11,8,14,3,2,"","","berry","",""],
-["美术组","角色、场景、硬表面各2<br>3D角色、3D怪物、3D场景、3D特效、3D武器、3D动作各2",18,0,18,0,1,0,0,"","","berry","",""],
-["客户端组","系统4，战斗、怪物、玩法、专项各1",8,1,7,13,25,4,1,"","","嘉绮","",""],
-["服务器组","2系统、1UE DS",3,0,3,0,55,3,0,"","","10","",""],
-["项目管理组","版本PM",1,0,1,0,3,0,0,"","","berry","",""]
+{n:"H项目组",ic:"H",c:"#9b59b6",r:[
+["策划组","关卡2、怪物2、玩法1、数值1、系统活跃1、商业化1、武器1、3C1、任务1、叙事1",12,1,11,8,21,4,1,"","","berry","",""],
+["美术组","角色、场景、硬表面各2<br>3D角色、3D怪物、3D场景、3D特效、3D武器、3D动作各2",18,0,18,0,0,0,0,"","","berry","",""],
+["客户端组","系统4，战斗、怪物、玩法、专项各1",8,2,6,25,27,4,1,"","","嘉绮","",""],
+["服务器组","2系统、1UE DS",3,1,2,33,63,4,1,"","","10","",""],
+["项目管理组","版本PM",1,0,1,0,5,3,0,"","","berry","",""],
 ]},
 
 {n:"体验设计组",ic:"UX",c:"#1abc9c",r:[
 ["视觉设计","",5,1,4,20,1,1,1,"","","candy","",""],
-["交互设计","",4,1,3,25,3,0,0,"","","candy","",""],
-["动效设计","",1,0,1,0,0,0,0,"","","candy","",""]
+["交互设计","",4,1,3,25,3,1,0,"","","candy","",""],
+["动效设计","",1,0,1,0,0,0,0,"","","candy","",""],
 ]},
 
 {n:"宣发设计组",ic:"AD",c:"#e67e22",r:[
 ["品宣平面设计师","",3,0,3,0,0,0,0,"","","candy","",""],
 ["美宣设计师","",3,0,3,0,0,0,0,"","","candy","",""],
-["多媒体设计","",2,0,2,0,3,0,0,"","","candy","",""]
+["多媒体设计","",2,0,2,0,2,1,0,"","","candy","",""],
 ]},
 
 {n:"技术美术组",ic:"TA",c:"#00cec9",r:[
-["技术美术","渲染",4,3,1,75,7,4,3,"","","candy","",""]
+["技术美术","渲染",4,3,1,75,8,6,4,"","","candy","",""],
 ]},
 
 {n:"综合管理组",ic:"PM",c:"#636e72",r:[
-["PM","TA引擎*1、多媒体*1",2,1,1,50,3,0,0,"","","小滨","",""]
+["PM","TA引擎*1、多媒体*1",2,1,1,50,3,0,0,"","","小滨","",""],
 ]},
 
 {n:"运营组",ic:"OP",c:"#fd79a8",r:[
-["DF海外宣发组","欧美宣发运营*2、欧美内容运营*2、全球BD运营*1、全球电竞运营*2、移动渠道/HD端渠道*1",8,0,8,0,9,1,0,"","","小滨","",""],
-["DF国内宣发组","宣发*4、内容*4、赛事*4、IP+BD*2、社区*4",18,1,17,6,18,0,1,"","","小滨","",""],
-["DF产品运营组","活跃*5、商业化*3、数值*3",11,1,10,9,49,3,1,"","","小滨","",""],
-["版本和平台运营组","版本*2、渠道*2",4,0,4,0,6,6,0,"","","小滨","",""],
-["数据研究组","数据分析*3",3,5,0,100,36,4,4,"","","小滨","",""],
-["运营合作组","运营PM*2",2,0,2,0,4,0,0,"","","小滨","",""],
-["逆战宣发组","宣发*4",4,1,3,25,0,4,0,"","","小滨","",""],
-["逆战产品运营组","端游*1、手游活跃*2、手游商业化*2",5,0,5,0,34,0,0,"","","小滨","",""],
-["CODM宣发组","内容运营*2",2,0,2,0,4,0,0,"","","小滨","",""],
-["CODM产品运营组","海外活跃*2、海外商业化*1",3,0,3,0,7,0,0,"","","小滨","",""],
-["宣发创意组","",0,0,0,0,9,0,0,"","","小滨","",""]
+["DF海外宣发组","欧美宣发运营*2、欧美内容运营*2、全球BD运营*1、全球电竞运营*2、移动渠道/HD端渠道*1",8,1,7,13,16,0,1,"","","小滨","",""],
+["DF国内宣发组","宣发*4、内容*4、赛事*4、IP+BD*2、社区*4",18,1,17,6,19,0,2,"","","小滨","",""],
+["DF产品运营组","活跃*5、商业化*3、数值*3",11,1,10,9,46,5,1,"","","小滨","",""],
+["版本和平台运营组","版本*2、渠道*2",4,1,3,25,14,8,1,"","","小滨","",""],
+["数据研究组","数据分析*3",3,4,0,100,38,7,4,"","","小滨","",""],
+["运营合作组","运营PM*2",2,0,2,0,7,0,0,"","","小滨","",""],
+["逆战宣发组","宣发*4",4,1,3,25,1,6,0,"","","小滨","",""],
+["逆战产品运营组","端游*1、手游活跃*2、手游商业化*2",5,2,3,40,37,1,2,"","","小滨","",""],
+["CODM宣发组","内容运营*2",2,0,2,0,9,2,0,"","","小滨","",""],
+["CODM产品运营组","海外活跃*2、海外商业化*1",3,0,3,0,7,4,0,"","","小滨","",""],
+["宣发创意组","",0,0,0,0,10,0,0,"","","小滨","",""],
 ]},
 
 {n:"引擎技术组",ic:"EG",c:"#74b9ff",r:[
-["引擎基础组","",1,0,1,0,0,0,0,"","","嘉绮","",""],
-["引擎一组","",2,0,2,0,0,3,2,"","","嘉绮","",""],
+["引擎基础组","",1,0,1,0,10,0,0,"","","嘉绮","",""],
+["引擎一组","",2,2,0,100,2,3,2,"","","嘉绮","",""],
 ["引擎二组","",3,0,3,0,0,0,0,"","","嘉绮","",""],
-["引擎四组","",2,0,2,0,0,0,0,"","","嘉绮","",""]
+["引擎四组","",2,0,2,0,0,0,0,"","","嘉绮","",""],
 ]},
 
 {n:"质量管理组",ic:"QA",c:"#a29bfe",r:[
-["质量管理组","测试*4",4,3,1,75,21,4,3,"","","小滨","",""]
-]}
+["质量管理组","测试*4",4,2,2,50,23,4,3,"","","小滨","",""],
+]},
+
 ];
 
 function pclr(p){return p>=50?'var(--green)':p>=10?'var(--orange)':'var(--red)'}
@@ -267,14 +268,41 @@ function rbar(){
 var el=document.getElementById('bc');
 var s=[].concat(P).sort(function(a,b){return b.r.reduce(function(s,r){return s+r[2]},0)-a.r.reduce(function(s,r){return s+r[2]},0)});
 var mx=s[0].r.reduce(function(s,r){return s+r[2]},0);
+var gtn=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[2]},0)},0);
+var gto=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[3]},0)},0);
+var avgRate=gtn>0?(gto/gtn*100):0;
 var h='';
-s.forEach(function(p){
+// 列标题行
+h+='<div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)">';
+h+='<div style="width:130px"></div><div style="flex:1"></div>';
+h+='<div style="min-width:200px;display:flex;align-items:center;font-size:12px;font-weight:600;color:var(--text2);flex-shrink:0">';
+h+='<span style="width:50px;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:5px"><span style="width:10px;height:10px;border-radius:3px;display:inline-block;background:var(--text2)"></span>需求</span>';
+h+='<span style="width:50px;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:5px"><span style="width:10px;height:10px;border-radius:3px;display:inline-block;background:var(--accent)"></span>OFFER</span>';
+h+='<span style="width:76px;text-align:center">完成率</span>';
+h+='</div></div>';
+// 数据行
+s.forEach(function(p,i){
 var t=p.r.reduce(function(s,r){return s+r[2]},0);
 var o=p.r.reduce(function(s,r){return s+r[3]},0);
-var w=(t/mx*100).toFixed(1);
-var rate=t>0?(o/t*100).toFixed(1):'0.0';
-var rclr=parseFloat(rate)>=50?'var(--green)':parseFloat(rate)>=10?'var(--orange)':'var(--text2)';
-h+='<div class="br"><div class="bl" title="'+p.n+'">'+p.n+'</div><div class="bt"><div class="bf" style="width:'+w+'%;background:'+p.c+'">'+t+'</div></div><div style="min-width:160px;font-size:13px;font-weight:600;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:8px"><span style="color:var(--green)">'+o+' OFFER</span><span style="color:'+rclr+'">'+rate+'%</span></div></div>';
+var wt=(t/mx*100);
+var wo=(o/mx*100);
+var rate=t>0?Math.round(o/t*100):'0';
+var rv=parseInt(rate);
+var rclr=rv<avgRate?'var(--red)':rv>=avgRate*1.5?'var(--green)':'var(--orange)';
+var rbg=rv<avgRate?'rgba(255,71,87,.12)':rv>=avgRate*1.5?'rgba(0,214,143,.12)':'rgba(255,170,0,.12)';
+h+='<div style="display:flex;align-items:center;gap:14px;padding:5px 0">';
+h+='<div style="width:130px;font-size:13px;font-weight:500;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)" title="'+p.n+'">'+p.n+'</div>';
+h+='<div style="flex:1;position:relative;height:30px;background:rgba(255,255,255,.03);border-radius:8px;overflow:hidden">';
+h+='<div style="position:absolute;left:0;top:0;height:100%;width:'+wt.toFixed(1)+'%;background:'+p.c+';border-radius:8px;opacity:.55"></div>';
+h+='<div style="position:absolute;left:0;top:0;height:100%;width:'+wo.toFixed(1)+'%;background:var(--accent);border-radius:8px;opacity:.7"></div>';
+h+='<div style="position:absolute;left:0;top:0;height:100%;width:'+wt.toFixed(1)+'%;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.6)">'+t+'</span></div>';
+if(o>0){h+='<div style="position:absolute;left:0;top:0;height:100%;width:'+wo.toFixed(1)+'%;display:flex;align-items:center;justify-content:flex-end;padding-right:6px"><span style="font-size:11px;font-weight:700;color:#fff">'+o+'</span></div>';}
+h+='</div>';
+h+='<div style="min-width:200px;display:flex;align-items:center;font-size:13px;font-weight:600;flex-shrink:0">';
+h+='<span style="width:50px;text-align:right;color:var(--text)">'+t+'</span>';
+h+='<span style="width:50px;text-align:right;color:var(--accent)">'+o+'</span>';
+h+='<span style="width:76px;text-align:center"><span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;background:'+rbg+';color:'+rclr+'">'+rate+'%</span></span>';
+h+='</div></div>';
 });
 el.innerHTML=h;
 }
@@ -895,7 +923,7 @@ function updateKPI() {
     kpiCards[0].querySelector('.kpi-sub').textContent = '13 个项目/中心';
     
     kpiCards[1].querySelector('.kpi-value').textContent = gto;
-    kpiCards[1].querySelector('.kpi-sub').textContent = '占比 ' + rate.toFixed(2) + '%';
+    kpiCards[1].querySelector('.kpi-sub').textContent = '完成率 ' + rate.toFixed(2) + '%';
     var extraEl = kpiCards[1].querySelector('.kpi-extra');
     if (extraEl) extraEl.textContent = extraOffer > 0 ? '额外录用 ' + extraOffer : '';
     

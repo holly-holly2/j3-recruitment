@@ -123,7 +123,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
   <div id="ovView">
     <div class="kpi-grid">
       <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">327</div><div class="kpi-sub">12 个项目/中心</div></div>
-      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">134</div><div class="kpi-sub">完成率 40.98%</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 12</div></div>
+      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">134</div><div class="kpi-sub">完成率 40.98%</div><div class="kpi-sub2" style="font-size:11px;color:#aaa;margin-top:2px">系统提报口径 56.34%（需求268）</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 12</div></div>
       <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">196</div><div class="kpi-sub">剩余 59.02%</div></div>
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1040</div><div class="kpi-sub">复试 181Ë1</div></div>
     </div>
@@ -930,6 +930,10 @@ function updateKPI() {
     
     kpiCards[1].querySelector('.kpi-value').textContent = gto;
     kpiCards[1].querySelector('.kpi-sub').textContent = '完成率 ' + rate.toFixed(2) + '%';
+    var sysNeed = 268;
+    var sysRate = (gto / sysNeed * 100).toFixed(2);
+    var sub2El = kpiCards[1].querySelector('.kpi-sub2');
+    if (sub2El) sub2El.textContent = '系统提报口径 ' + sysRate + '%（需求' + sysNeed + '）';
     var extraEl = kpiCards[1].querySelector('.kpi-extra');
     if (extraEl) extraEl.textContent = extraOffer > 0 ? '额外录用 ' + extraOffer : '';
     

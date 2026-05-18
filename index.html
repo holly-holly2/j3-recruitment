@@ -128,29 +128,10 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1040</div><div class="kpi-sub">复试 181Ë1</div></div>
     </div>
     <div class="bcs"><h3>📊 各项目需求&进展</h3><div id="bc"></div></div>
-    <div class="cg">
-      <div class="cc"><h3>🥧 项目组需求占比</h3><canvas id="pc" width="300" height="300"></canvas></div>
-      <div class="cc"><h3>👥 岗位类型需求分布</h3><canvas id="rc" width="300" height="300"></canvas></div>
-    </div>
-    <!-- 趋势图 -->
-    <div class="bcs" style="margin-bottom:24px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <h3>📈 校招完成率趋势</h3>
-        <div style="display:flex;gap:6px">
-          <button class="trend-tab active" id="ttAll" onclick="swTrend('all')">总完成率</button>
-          <button class="trend-tab" id="ttProj" onclick="swTrend('proj')">按项目</button>
-          <button class="trend-tab" id="ttRole" onclick="swTrend('role')">按职位</button>
-        </div>
-      </div>
-      <div id="trendAll"><canvas id="trendCanvasAll" width="800" height="320"></canvas></div>
-      <div id="trendRole" style="display:none"><canvas id="trendCanvasRole" width="800" height="320"></canvas></div>
-      <div id="trendProj" style="display:none"><canvas id="trendCanvasProj" width="800" height="320"></canvas></div>
-      <p style="font-size:11px;color:var(--text2);margin-top:12px;text-align:center">数据积累越多趋势越清晰</p>
-    </div>
     <!-- 拒绝OFFER分析 -->
     <div class="bcs" style="margin-bottom:24px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-        <h3 style="margin:0">❌ 拒绝 OFFER 分析</h3>
+        <h3 style="margin:0">拒绝 OFFER 分析</h3>
         <span style="font-size:12px;color:var(--text2);background:rgba(255,107,107,0.12);padding:4px 10px;border-radius:12px">共 <b style="color:#ff6b6b">13</b> 人拒签</span>
       </div>
       <!-- 上半部分：按组织 + 按细分岗位 -->
@@ -206,11 +187,11 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
         <div style="background:var(--card);border-radius:12px;padding:20px;border:1px solid var(--border)">
           <div style="font-size:13px;font-weight:600;margin-bottom:16px;color:var(--text1)">🏢 拒绝 Offer 去向</div>
           <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,107,107,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">🎮 米哈游</span><span style="font-size:14px;font-weight:800;color:#ff6b6b">4</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">🐜 蚂蚁安全</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">☁️ 阿里云</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">💚 上海英伟达</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(164,176,190,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">🎓 留校科研</span><span style="font-size:14px;font-weight:800;color:#a4b0be">1</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,107,107,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">米哈游</span><span style="font-size:14px;font-weight:800;color:#ff6b6b">4</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">蚂蚁安全</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">阿里云</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,165,2,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">上海英伟达</span><span style="font-size:14px;font-weight:800;color:#ffa502">1</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(164,176,190,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">留校科研</span><span style="font-size:14px;font-weight:800;color:#a4b0be">1</span></div>
           </div>
           <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);text-align:center">
             已追踪去向 <b style="color:var(--text1)">8</b>/13 人，5人待确认
@@ -221,6 +202,26 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
       <div style="margin-top:16px;padding:14px 18px;background:linear-gradient(135deg,rgba(255,107,107,0.06),rgba(255,165,2,0.04));border-radius:10px;border:1px solid rgba(255,107,107,0.15)">
         <div style="font-size:12px;color:var(--text1);line-height:1.7"><b style="color:#ff6b6b">💡 洞察：</b>超半数拒签（7/13）因业务方向/兴趣不符，主要是开发岗候选人对游戏业务或射击品类兴趣不高；米哈游是最大竞争对手（4人流向）；导师/实验室限制导致4人无法入职，建议对在读研究生候选人前置确认实习可行性。技术研发类通道拒签最集中（9/13，后台开发5+客户端3+测试1），需重点关注该通道候选人意向管理。</div>
       </div>
+    </div>
+
+    <div class="cg">
+      <div class="cc"><h3>🥧 项目组需求占比</h3><canvas id="pc" width="300" height="300"></canvas></div>
+      <div class="cc"><h3>👥 岗位类型需求分布</h3><canvas id="rc" width="300" height="300"></canvas></div>
+    </div>
+    <!-- 趋势图 -->
+    <div class="bcs" style="margin-bottom:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <h3>📈 校招完成率趋势</h3>
+        <div style="display:flex;gap:6px">
+          <button class="trend-tab active" id="ttAll" onclick="swTrend('all')">总完成率</button>
+          <button class="trend-tab" id="ttProj" onclick="swTrend('proj')">按项目</button>
+          <button class="trend-tab" id="ttRole" onclick="swTrend('role')">按职位</button>
+        </div>
+      </div>
+      <div id="trendAll"><canvas id="trendCanvasAll" width="800" height="320"></canvas></div>
+      <div id="trendRole" style="display:none"><canvas id="trendCanvasRole" width="800" height="320"></canvas></div>
+      <div id="trendProj" style="display:none"><canvas id="trendCanvasProj" width="800" height="320"></canvas></div>
+      <p style="font-size:11px;color:var(--text2);margin-top:12px;text-align:center">数据积累越多趋势越清晰</p>
     </div>
     <!-- 总览洞察 -->
     <div class="insight-section">

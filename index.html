@@ -124,7 +124,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
     <div class="kpi-grid">
       <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">327</div><div class="kpi-sub">12 个项目/中心</div></div>
       <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">134</div><div class="kpi-sub">完成率 40.98%</div><div class="kpi-sub2" style="font-size:11px;color:#aaa;margin-top:2px">系统提报口径 56.34%（需求268）</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 12</div></div>
-      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">196</div><div class="kpi-sub">剩余 59.02%</div></div>
+      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">196</div><div class="kpi-sub">剩余 59.02%</div><div class="kpi-sub2" style="font-size:11px;color:#aaa;margin-top:2px">系统提报口径 117（需求268）</div></div>
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1040</div><div class="kpi-sub">复试 181Ë1</div></div>
     </div>
     <div class="bcs"><h3>📊 各项目需求&进展</h3><div id="bc"></div></div>
@@ -1015,6 +1015,9 @@ function updateKPI() {
     
     kpiCards[2].querySelector('.kpi-value').textContent = gtp;
     kpiCards[2].querySelector('.kpi-sub').textContent = '剩余 ' + (gtn > 0 ? (gtp / gtn * 100).toFixed(2) : 0) + '%';
+    var sysPending = sysNeed - gto;
+    var sub2El2 = kpiCards[2].querySelector('.kpi-sub2');
+    if (sub2El2) sub2El2.textContent = '系统提报口径 ' + (sysPending > 0 ? sysPending : 0) + '（需求' + sysNeed + '）';
     
     kpiCards[3].querySelector('.kpi-value').textContent = gtf;
     kpiCards[3].querySelector('.kpi-sub').textContent = '复试 ' + gts + ' · HR面试 ' + gth;

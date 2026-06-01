@@ -400,7 +400,7 @@ var t=p.r.reduce(function(s,r){return s+r[2]},0);
 var o=p.r.reduce(function(s,r){return s+r[3]},0);
 var wt=(t/mx*100);
 var wo=(o/mx*100);
-var rate=t>0?Math.round(o/t*100):'0';
+var rate=t>0?Math.round(o/t*100):(o>0?100:0);
 var rv=parseInt(rate);
 var rclr=rv<avgRate?'var(--red)':rv>=avgRate*1.5?'var(--green)':'var(--orange)';
 var rbg=rv<avgRate?'rgba(255,71,87,.12)':rv>=avgRate*1.5?'rgba(0,214,143,.12)':'rgba(255,170,0,.12)';
@@ -469,7 +469,7 @@ var gto=P.reduce(function(s,p){return s+p.r.reduce(function(s2,r){return s2+r[3]
 var avgPg=gtn>0?(gto/gtn*100):0;
 P.forEach(function(p,pi){
 var tn=p.r.reduce(function(s,r){return s+r[2]},0),to=p.r.reduce(function(s,r){return s+r[3]},0),tp=tn-to;
-var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tpg=tn>0?((to/tn)*100).toFixed(1):(to>0?'100.0':'0.0');
 var tcu=p.r.reduce(function(s,r){return s+r[12]},0);
 var tf=p.r.reduce(function(s,r){return s+r[6]},0),ts=p.r.reduce(function(s,r){return s+r[7]},0),th=p.r.reduce(function(s,r){return s+r[8]},0);
 var warn=parseFloat(tpg)<avgPg;
@@ -548,7 +548,7 @@ var rows=hrMap[hr].rows;
 var tn=rows.reduce(function(s,r){return s+r.need},0);
 var to=rows.reduce(function(s,r){return s+r.offer},0);
 var tp=tn-to;
-var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tpg=tn>0?((to/tn)*100).toFixed(1):(to>0?'100.0':'0.0');
 var tf=rows.reduce(function(s,r){return s+r.first},0);
 var ts=rows.reduce(function(s,r){return s+r.second},0);
 var th2=rows.reduce(function(s,r){return s+r.hr2},0);
@@ -617,7 +617,7 @@ var rows=roleMap[role].rows;
 var tn=rows.reduce(function(s,r){return s+r.need},0);
 var to=rows.reduce(function(s,r){return s+r.offer},0);
 var tp=tn-to;
-var tpg=tn>0?((to/tn)*100).toFixed(1):'0.00';
+var tpg=tn>0?((to/tn)*100).toFixed(1):(to>0?'100.0':'0.0');
 var tf=rows.reduce(function(s,r){return s+r.first},0);
 var ts=rows.reduce(function(s,r){return s+r.second},0);
 var th2=rows.reduce(function(s,r){return s+r.hr2},0);
@@ -669,7 +669,7 @@ var convRate=gtf>0?(gto/gtf*100):0;
 var projStats=P.map(function(p){
 var tn=0,to=0,tf=0,ts=0,th=0;
 p.r.forEach(function(r){tn+=r[2];to+=r[3];tf+=r[6];ts+=r[7];th+=r[8]});
-return {n:p.n,need:tn,offer:to,rate:tn>0?(to/tn*100):0,first:tf,second:ts,hr:th,pipe:tf+ts+th};
+return {n:p.n,need:tn,offer:to,rate:tn>0?(to/tn*100):(to>0?100:0),first:tf,second:ts,hr:th,pipe:tf+ts+th};
 });
 projStats.sort(function(a,b){return b.need-a.need});
 
@@ -1106,15 +1106,15 @@ DELTA.forEach(function(d){
 });
 
 // Aggregate by role type (岗位类型)
-var roleTypes={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
-var roleOld={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
-var roleNew={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
+var roleTypes={'策划':0,'美术&设计':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'其他':0};
+var roleOld={'策划':0,'美术&设计':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'其他':0};
+var roleNew={'策划':0,'美术&设计':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'其他':0};
 
 DELTA.forEach(function(d){
   var cat='其他';
   var r=d.r.toLowerCase();
   if(r.indexOf('策划')>=0) cat='策划';
-  else if(r.indexOf('美术')>=0||r.indexOf('美宣')>=0||r.indexOf('3d')>=0||r.indexOf('2d')>=0||r.indexOf('动效')>=0||r.indexOf('特效')>=0) cat='美术';
+  else if(r.indexOf('美术')>=0||r.indexOf('美宣')>=0||r.indexOf('3d')>=0||r.indexOf('2d')>=0||r.indexOf('动效')>=0||r.indexOf('特效')>=0||r.indexOf('视觉')>=0||r.indexOf('交互')>=0||r.indexOf('设计')>=0||r.indexOf('多媒体')>=0||r.indexOf('品宣')>=0) cat='美术&设计';
   else if(r.indexOf('客户端')>=0) cat='客户端';
   else if(r.indexOf('服务器')>=0) cat='服务器';
   else if(r.indexOf('项目管理')>=0||r.indexOf('pm')>=0) cat='项目管理';
@@ -1122,7 +1122,6 @@ DELTA.forEach(function(d){
   else if(r.indexOf('引擎')>=0) cat='引擎';
   else if(r.indexOf('质量')>=0||r.indexOf('测试')>=0) cat='质量';
   else if(r.indexOf('技术美术')>=0) cat='技术美术';
-  else if(r.indexOf('视觉')>=0||r.indexOf('交互')>=0||r.indexOf('设计')>=0||r.indexOf('多媒体')>=0||r.indexOf('品宣')>=0) cat='设计';
   roleOld[cat]+=d.o;
   roleNew[cat]+=d.n;
   roleTypes[cat]+=d.d;
@@ -1140,6 +1139,37 @@ h+='<div class="kpi-card kpi-green"><div class="kpi-label">26.5 review后需求<
 h+='<div class="kpi-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px"><div class="kpi-label">净变化</div><div class="kpi-value" style="color:var(--red)">'+totalDiff+'</div><div class="kpi-sub">降幅 '+(((totalOld-totalNew)/totalOld)*100).toFixed(1)+'%</div></div>';
 h+='<div class="kpi-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px"><div class="kpi-label">缩减岗位数</div><div class="kpi-value" style="color:var(--orange)">'+DELTA.filter(function(d){return d.d<0}).length+'</div><div class="kpi-sub">共 '+DELTA.length+' 个岗位方向</div></div>';
 h+='</div>';
+
+// By role type chart (moved above project chart)
+h+='<div class="bcs" style="margin-bottom:32px"><h3>🏷️ 按岗位类型：需求变化对比</h3>';
+h+='<div style="margin-top:16px">';
+var roleCats=Object.keys(roleTypes).filter(function(k){return roleOld[k]>0||roleNew[k]>0}).sort(function(a,b){return roleTypes[a]-roleTypes[b]});
+var roleMax=Math.max.apply(null,roleCats.map(function(k){return Math.max(roleOld[k],roleNew[k])}));
+
+roleCats.forEach(function(cat){
+  var diff=roleTypes[cat];
+  var diffStr=diff>0?'+'+diff:diff===0?'0':String(diff);
+  var diffColor=diff<0?'var(--red)':diff>0?'var(--green)':'var(--text2)';
+  var oldW=roleMax>0?(roleOld[cat]/roleMax*100):0;
+  var newW=roleMax>0?(roleNew[cat]/roleMax*100):0;
+  h+='<div style="margin-bottom:14px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+  h+='<span style="font-size:13px;font-weight:600;color:var(--text)">'+cat+'</span>';
+  h+='<span style="font-size:13px;font-weight:700;color:'+diffColor+'">'+diffStr+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+  h+='<span style="font-size:11px;color:var(--text2);width:50px">26.2</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+oldW+'%;height:100%;background:rgba(255,255,255,0.15);border-radius:4px"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--text2);width:30px;text-align:right">'+roleOld[cat]+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px">';
+  h+='<span style="font-size:11px;color:var(--accent);width:50px">26.5</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+newW+'%;height:100%;background:var(--accent);border-radius:4px;opacity:0.7"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--accent);width:30px;text-align:right">'+roleNew[cat]+'</span>';
+  h+='</div>';
+  h+='</div>';
+});
+h+='</div></div>';
 
 // By project chart
 h+='<div class="bcs" style="margin-bottom:32px"><h3>📊 按项目：需求变化对比</h3>';
@@ -1167,37 +1197,6 @@ projs.forEach(function(p){
   h+='<span style="font-size:11px;color:var(--accent);width:50px">26.5</span>';
   h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative"><div style="width:'+newW+'%;height:100%;background:var(--accent);border-radius:4px;opacity:0.7"></div></div>';
   h+='<span style="font-size:12px;font-weight:600;color:var(--accent);width:30px;text-align:right">'+d.new+'</span>';
-  h+='</div>';
-  h+='</div>';
-});
-h+='</div></div>';
-
-// By role type chart
-h+='<div class="bcs" style="margin-bottom:32px"><h3>🏷️ 按岗位类型：需求变化对比</h3>';
-h+='<div style="margin-top:16px">';
-var roleCats=Object.keys(roleTypes).filter(function(k){return roleOld[k]>0||roleNew[k]>0}).sort(function(a,b){return roleTypes[a]-roleTypes[b]});
-var roleMax=Math.max.apply(null,roleCats.map(function(k){return Math.max(roleOld[k],roleNew[k])}));
-
-roleCats.forEach(function(cat){
-  var diff=roleTypes[cat];
-  var diffStr=diff>0?'+'+diff:diff===0?'0':String(diff);
-  var diffColor=diff<0?'var(--red)':diff>0?'var(--green)':'var(--text2)';
-  var oldW=roleMax>0?(roleOld[cat]/roleMax*100):0;
-  var newW=roleMax>0?(roleNew[cat]/roleMax*100):0;
-  h+='<div style="margin-bottom:14px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
-  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
-  h+='<span style="font-size:13px;font-weight:600;color:var(--text)">'+cat+'</span>';
-  h+='<span style="font-size:13px;font-weight:700;color:'+diffColor+'">'+diffStr+'</span>';
-  h+='</div>';
-  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
-  h+='<span style="font-size:11px;color:var(--text2);width:50px">26.2</span>';
-  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+oldW+'%;height:100%;background:rgba(255,255,255,0.15);border-radius:4px"></div></div>';
-  h+='<span style="font-size:12px;font-weight:600;color:var(--text2);width:30px;text-align:right">'+roleOld[cat]+'</span>';
-  h+='</div>';
-  h+='<div style="display:flex;align-items:center;gap:8px">';
-  h+='<span style="font-size:11px;color:var(--accent);width:50px">26.5</span>';
-  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+newW+'%;height:100%;background:var(--accent);border-radius:4px;opacity:0.7"></div></div>';
-  h+='<span style="font-size:12px;font-weight:600;color:var(--accent);width:30px;text-align:right">'+roleNew[cat]+'</span>';
   h+='</div>';
   h+='</div>';
 });

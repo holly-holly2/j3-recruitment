@@ -104,10 +104,10 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
   <div style="display:flex;align-items:flex-start;justify-content:space-between">
     <div>
       <h1>J3-27届校招进展</h1>
-      <p>数据统计截至 2026.05.15 · 共 12 个项目/中心 · 总需求数 327</p>
+      <p>数据统计截至 2026.06.01 · 共 12 个项目/中心 · 总需求数 246（26.5 review后）</p>
     </div>
     <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
-      <span style="font-size:12px;color:var(--text2)">🕐 上次更新：2026-05-15 10:00</span>
+      <span style="font-size:12px;color:var(--text2)">🕐 上次更新：2026-06-01 13:43</span>
       <button class="refresh-btn" onclick="refreshData()">🔄 刷新数据</button>
     </div>
   </div>
@@ -116,16 +116,17 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
     <button class="nav-btn" id="navProj" onclick="swNav('proj')">📁 按项目</button>
     <button class="nav-btn" id="navRole" onclick="swNav('role')">🏷️ 按职位</button>
     <button class="nav-btn" id="navHr" onclick="swNav('hr')">👤 按 HR</button>
+    <button class="nav-btn" id="navDelta" onclick="swNav('delta')">📐 需求变化</button>
   </div>
 </div>
 <div class="container">
   <!-- 总览 -->
   <div id="ovView">
     <div class="kpi-grid">
-      <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">327</div><div class="kpi-sub">12 个项目/中心</div></div>
-      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">134</div><div class="kpi-sub">完成率 40.98%</div><div class="kpi-sub2" style="font-size:11px;color:#aaa;margin-top:2px">系统提报口径 56.34%（需求268）</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 12</div></div>
-      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">196</div><div class="kpi-sub">剩余 59.02%</div><div class="kpi-sub2" style="font-size:11px;color:#aaa;margin-top:2px">系统提报口径 117（需求268）</div></div>
-      <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1040</div><div class="kpi-sub">复试 181Ë1</div></div>
+      <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">246</div><div class="kpi-sub">12 个项目/中心（26.5 review后）</div></div>
+      <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">165</div><div class="kpi-sub">完成率 67.07%</div><div class="kpi-extra" style="font-size:11px;color:var(--accent2);margin-top:4px">额外录用 18</div></div>
+      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">89</div><div class="kpi-sub">剩余 36.18%</div></div>
+      <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1137</div><div class="kpi-sub">复试 188 · HR面 174</div></div>
     </div>
     <div class="bcs"><h3>📊 各项目需求&进展</h3><div id="bc"></div></div>
     <!-- 拒绝OFFER分析 -->
@@ -247,85 +248,139 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
     <div id="roleSec"></div>
     <div id="insightRole"></div>
   </div>
+  <!-- 需求变化分析 -->
+  <div id="deltaView" style="display:none">
+    <div id="deltaContent"></div>
+  </div>
 </div>
-<div class="footer">J3-27届校招进展 · 可视化报表 · 数据来源：企业微信文档</div>
 <script>
 var P=[
 {n:"逆战项目组",ic:"NZ",c:"#e74c3c",r:[
-["策划组","内容*5、战斗*3、数值*2、商业化*3",13,4,9,31,34,7,3,"","","杨倩","",""],
-["美术组","3D：动作*2、场景*3、特效*2、角色*52D:商业化角色*1、怪*1、武器*1",18,9,9,50,3,2,6,"","","小卫","",""],
-["客户端组","战斗-武器*1、战斗-3C/动画*1、战斗-怪物*1、玩法*2、系统*3、效能*1、性能*1",10,4,6,40,33,6,3,"","","杨倩","",""],
-["服务器组","/",6,5,1,83,15,1,4,"","","杨倩","",""],
-["项目管理组","/",2,1,1,50,15,1,1,"","","杨倩","",""]
+["策划组","内容*5、战斗*3、数值*2、商业化*3",13,4,9,31,32,1,7,"","","杨倩","",""],
+["美术组","3D：动作*2、场景*3、特效*2、角色*52D:商业化角色*1、怪*1、武器*1",18,11,7,61,10,2,7,"","","小卫","",""],
+["客户端组","战斗-武器*1、战斗-3C/动画*1、战斗-怪物*1、玩法*2、系统*3、效能*1、性能*1",8,4,4,60,37,7,4,"","","杨倩","",""],
+["服务器组","/",4,5,0,100,13,2,6,"","","杨倩","",""],
+["项目管理组","/",2,1,1,50,14,0,1,"","","杨倩","",""]
 ]},
 {n:"C-Game项目组",ic:"CG",c:"#3498db",r:[
-["策划组","系统、玩法、关卡各2",6,5,1,83,40,14,4,"","","小卫","",""],
-["美术组","2D场景/2D武器/3D场景/3D角色/特效/动画各3",18,2,16,11,22,4,3,"","","小卫","",""],
-["客户端组","系统2，玩法2",4,1,3,25,7,3,1,"","","小卫","",""],
-["服务器组","",3,2,1,67,32,1,2,"","","小卫","",""],
-["项目管理组","",3,1,2,33,14,1,1,"","","小卫","",""]
+["策划组","系统、玩法、关卡各2",5,5,0,100,36,14,4,"","","小卫","",""],
+["美术组","2D场景/2D武器/3D场景/3D角色/特效/动画各3",10,3,7,61,13,1,3,"","","小卫","",""],
+["客户端组","系统2，玩法2",2,1,1,75,7,3,1,"","","小卫","",""],
+["服务器组","",2,2,0,100,24,1,4,"","","小卫","",""],
+["项目管理组","",2,1,1,67,14,1,1,"","","小卫","",""]
 ]},
 {n:"Delta Force项目组",ic:"DF",c:"#f39c12",r:[
-["策划组","系统3、商业化3、叙事3、战斗3、关卡2、海外2",16,7,9,44,35,13,4,"","","candy","",""],
-["美术组","场景原画*2；美宣*2；角色原画*3；武器原画*3；3D场景*6；3D角色*4；3D武器*4；3D动作*4；演绎动画*2；技术美术*2；特效*2",34,26,8,76,40,9,24,"","","小卫","",""],
-["客户端组","系统2，玩法8，上海6",16,10,6,63,25,8,10,"","","嘉绮","",""],
-["服务器组","系统4，AI2",6,1,5,17,39,1,1,"","","嘉绮","",""],
-["项目管理组","版本*2、APM*2",3,1,2,33,12,0,1,"","","小滨","",""]
+["策划组","系统3、商业化3、叙事3、战斗3、关卡2、海外2",12,7,5,69,41,14,4,"","","candy","",""],
+["美术组","场景原画*2；美宣*2；角色原画*3；武器原画*3；3D场景*6；3D角色*4；3D武器*4；3D动作*4；演绎动画*2；技术美术*2；特效*2",34,26,8,76,35,4,26,"","","小卫","",""],
+["客户端组","系统2，玩法8，上海6",16,12,4,75,53,15,11,"","","嘉绮","",""],
+["服务器组","系统4，AI2",6,3,3,50,49,2,2,"","","嘉绮","",""],
+["项目管理组","版本*2、APM*2",2,1,1,67,15,0,0,"","","小滨","",""]
 ]},
 {n:"穿越火线手游项目组",ic:"CF",c:"#2ecc71",r:[
-["策划组","武器、系统、商业*1关卡*3",6,4,2,67,19,6,5,"","","berry","",""],
-["美术组","3d角色：33d武器：23d场景：23D动作：23D特效：2原画（武器设计+美宣+场景设计+角色设计）：4",15,6,9,40,17,8,8,"","","berry","",""],
-["客户端组","gameplay 系统 引擎各1，另外有好苗子可以再录",4,1,3,25,42,0,2,"","","10","",""],
-["服务器组","3个系统、1个算法",4,3,1,75,49,19,7,"","","10","",""],
-["项目管理组","1个美术PM 1个版本PM",2,0,2,0,0,0,0,"","","berry","",""]
+["策划组","武器、系统、商业*1关卡*3",6,4,2,67,14,5,5,"","","berry","",""],
+["美术组","3d角色：33d武器：23d场景：23D动作：23D特效：2原画（武器设计+美宣+场景设计+角色设计）：4",8,6,2,87,11,5,7,"","","berry","",""],
+["客户端组","gameplay 系统 引擎各1，另外有好苗子可以再录",2,1,1,75,47,0,2,"","","10","",""],
+["服务器组","3个系统、1个算法",4,2,2,50,57,20,7,"","","10","",""],
+["项目管理组","1个美术PM 1个版本PM",1,0,1,50,0,0,0,"","","berry","",""]
 ]},
 {n:"H项目组",ic:"H",c:"#9b59b6",r:[
-["策划组","关卡2、怪物2、玩法1、数值1、系统活跃1、商业化1、武器1、3C1、任务1、叙事1",12,9,3,75,43,6,11,"","","berry","",""],
-["美术组","角色、场景、硬表面各23D角色、3D怪物、3D场景、3D特效、3D武器、3D动作各2",18,4,14,22,0,1,3,"","","berry","",""],
-["客户端组","系统4，战斗、怪物、玩法、专项各1",8,4,4,50,43,7,3,"","","10","",""],
-["服务器组","2系统、1UE DS",3,2,1,67,76,4,5,"","","10","",""],
-["项目管理组","版本PM",1,0,1,0,7,3,1,"","","berry","",""]
+["策划组","关卡2、怪物2、玩法1、数值1、系统活跃1、商业化1、武器1、3C1、任务1、叙事1",12,9,3,75,44,4,11,"","","berry","",""],
+["美术组","角色、场景、硬表面各23D角色、3D怪物、3D场景、3D特效、3D武器、3D动作各2",8,5,3,83,6,0,4,"","","berry","",""],
+["客户端组","系统4，战斗、怪物、玩法、专项各1",6,5,1,88,45,9,4,"","","10","",""],
+["服务器组","2系统、1UE DS",3,2,1,67,78,5,5,"","","10","",""],
+["项目管理组","版本PM",1,1,0,100,5,3,1,"","","berry","",""]
 ]},
 {n:"体验设计组",ic:"UX",c:"#1abc9c",r:[
-["视觉设计","",5,1,4,20,0,0,0,"","","candy","",""],
-["交互设计","",4,1,3,25,4,0,2,"","","candy","",""],
-["动效设计","",1,0,1,0,0,0,0,"","","candy","",""]
+["视觉设计","",1,1,0,100,1,0,2,"","","candy","",""],
+["交互设计","",0,1,0,100,4,0,1,"","","candy","",""],
+["动效设计","",0,0,0,100,0,0,0,"","","candy","",""]
 ]},
 {n:"宣发设计组",ic:"AD",c:"#e67e22",r:[
-["品宣平面设计师","",3,0,3,0,0,0,0,"","","candy","",""],
-["美宣设计师","",3,0,3,0,0,0,0,"","","candy","",""],
-["多媒体设计","",2,2,0,100,0,0,1,"","","candy","",""]
+["品宣平面设计师","",2,0,2,33,0,0,0,"","","candy","",""],
+["美宣设计师","",2,0,2,33,0,0,0,"","","candy","",""],
+["多媒体设计","",2,2,0,100,0,0,2,"","","candy","",""]
 ]},
 {n:"技术美术组",ic:"TA",c:"#00cec9",r:[
-["技术美术","渲染",4,4,0,100,5,3,3,"","","candy","",""]
+["技术美术","渲染",4,4,0,100,21,8,6,"","","candy","",""]
 ]},
 {n:"综合管理组",ic:"PM",c:"#636e72",r:[
-["PM","TA引擎*1、多媒体*1",2,1,1,50,4,12,0,"","","小滨","",""]
+["PM","TA引擎*1、多媒体*1",0,1,0,100,6,13,0,"","","小滨","",""]
 ]},
 {n:"运营组",ic:"OP",c:"#fd79a8",r:[
-["DF海外宣发组","欧美宣发运营*2、欧美内容运营*2、全球BD运营*1、全球电竞运营*2、移动渠道/HD端渠道*1",8,3,5,38,29,3,3,"","","小滨","",""],
-["DF国内宣发组","宣发*4、内容*4、赛事*4、IP+BD*2、社区*4",18,6,12,33,106,1,5,"","","小滨","",""],
-["DF产品运营组","活跃*5、商业化*3、数值*3",11,1,10,9,77,9,1,"","","小滨","",""],
-["版本和平台运营组","版本*2、渠道*2",4,3,1,75,31,10,3,"","","小滨","",""],
-["数据研究组","数据分析*3",3,6,0,100,51,4,5,"","","小滨","",""],
-["运营合作组","运营PM*2",2,0,2,0,18,0,0,"","","小滨","",""],
-["逆战宣发组","宣发*4",4,2,2,50,2,5,1,"","","小滨","",""],
-["逆战产品运营组","端游*1、手游活跃*2、手游商业化*2",5,2,3,40,66,2,3,"","","小滨","",""],
-["CODM宣发组","内容运营*2",2,1,1,50,10,6,1,"","","小滨","",""],
-["CODM产品运营组","海外活跃*2、海外商业化*1",3,1,2,33,14,7,1,"","","小滨","",""],
-["宣发创意组","",0,0,0,0,16,0,0,"","","小滨","",""]
+["DF海外宣发组","欧美宣发运营*2、欧美内容运营*2、全球BD运营*1、全球电竞运营*2、移动渠道/HD端渠道*1",6,3,3,63,25,4,1,"","","小滨","",""],
+["DF国内宣发组","宣发*4、内容*4、赛事*4、IP+BD*2、社区*4",10,6,4,78,103,2,6,"","","小滨","",""],
+["DF产品运营组","活跃*5、商业化*3、数值*3",8,4,4,64,68,9,5,"","","小滨","",""],
+["版本和平台运营组","版本*2、渠道*2",2,2,0,100,26,9,2,"","","小滨","",""],
+["数据研究组","数据分析*3",3,7,0,100,46,2,7,"","","小滨","",""],
+["运营合作组","运营PM*2",2,0,2,0,15,0,0,"","","小滨","",""],
+["逆战宣发组","宣发*4",2,2,0,100,2,4,1,"","","小滨","",""],
+["逆战产品运营组","端游*1、手游活跃*2、手游商业化*2",4,2,2,60,62,2,3,"","","小滨","",""],
+["CODM宣发组","内容运营*2",1,1,0,100,9,6,2,"","","小滨","",""],
+["CODM产品运营组","海外活跃*2、海外商业化*1",2,1,1,67,11,9,1,"","","小滨","",""],
+["宣发创意组","",0,0,0,0,10,0,0,"","","小滨","",""]
 ]},
 {n:"引擎技术组",ic:"EG",c:"#74b9ff",r:[
 ["引擎基础组","",1,1,0,100,0,0,1,"","","嘉绮","",""],
 ["引擎一组","",2,2,0,100,0,0,2,"","","嘉绮","",""],
-["引擎二组","",3,0,3,0,0,0,0,"","","嘉绮","",""],
-["引擎四组","",2,0,2,0,0,0,0,"","","嘉绮","",""]
+["引擎二组","",1,0,1,67,0,0,0,"","","嘉绮","",""],
+["引擎四组","",1,1,0,100,0,0,1,"","","嘉绮","",""]
 ]},
 {n:"质量管理组",ic:"QA",c:"#a29bfe",r:[
-["质量管理组","测试*4",4,2,2,50,28,2,3,"","","小滨","",""]
+["质量管理组","测试*4",3,3,1,75,28,2,4,"","","小滨","",""]
 ]}
 ];
 
+var DELTA=[
+{p:"逆战项目组",r:"策划组",o:13,n:13,d:0},
+{p:"逆战项目组",r:"美术组",o:18,n:18,d:0},
+{p:"逆战项目组",r:"客户端组",o:10,n:8,d:-2},
+{p:"逆战项目组",r:"服务器组",o:6,n:4,d:-2},
+{p:"逆战项目组",r:"项目管理组",o:2,n:2,d:0},
+{p:"C-Game项目组",r:"策划组",o:6,n:5,d:-1},
+{p:"C-Game项目组",r:"美术组",o:18,n:10,d:-8},
+{p:"C-Game项目组",r:"客户端组",o:4,n:2,d:-2},
+{p:"C-Game项目组",r:"服务器组",o:3,n:2,d:-1},
+{p:"C-Game项目组",r:"项目管理组",o:3,n:2,d:-1},
+{p:"Delta Force项目组",r:"策划组",o:16,n:12,d:-4},
+{p:"Delta Force项目组",r:"美术组",o:34,n:34,d:0},
+{p:"Delta Force项目组",r:"客户端组",o:16,n:16,d:0},
+{p:"Delta Force项目组",r:"服务器组",o:6,n:6,d:0},
+{p:"Delta Force项目组",r:"项目管理组",o:3,n:2,d:-1},
+{p:"穿越火线手游项目组",r:"策划组",o:6,n:6,d:0},
+{p:"穿越火线手游项目组",r:"美术组",o:15,n:8,d:-7},
+{p:"穿越火线手游项目组",r:"客户端组",o:4,n:2,d:-2},
+{p:"穿越火线手游项目组",r:"服务器组",o:4,n:4,d:0},
+{p:"穿越火线手游项目组",r:"项目管理组",o:2,n:1,d:-1},
+{p:"H项目组",r:"策划组",o:12,n:12,d:0},
+{p:"H项目组",r:"美术组",o:18,n:8,d:-10},
+{p:"H项目组",r:"客户端组",o:8,n:6,d:-2},
+{p:"H项目组",r:"服务器组",o:3,n:3,d:0},
+{p:"H项目组",r:"项目管理组",o:1,n:1,d:0},
+{p:"体验设计组",r:"视觉设计",o:5,n:1,d:-4},
+{p:"体验设计组",r:"交互设计",o:4,n:0,d:-4},
+{p:"体验设计组",r:"动效设计",o:1,n:0,d:-1},
+{p:"宣发设计组",r:"品宣平面设计师",o:3,n:2,d:-1},
+{p:"宣发设计组",r:"美宣设计师",o:3,n:2,d:-1},
+{p:"宣发设计组",r:"多媒体设计",o:2,n:2,d:0},
+{p:"技术美术组",r:"技术美术",o:4,n:4,d:0},
+{p:"综合管理组",r:"PM",o:2,n:0,d:-2},
+{p:"运营组",r:"DF海外宣发组",o:8,n:6,d:-2},
+{p:"运营组",r:"DF国内宣发组",o:18,n:10,d:-8},
+{p:"运营组",r:"DF产品运营组",o:11,n:8,d:-3},
+{p:"运营组",r:"版本和平台运营组",o:4,n:2,d:-2},
+{p:"运营组",r:"数据研究组",o:3,n:3,d:0},
+{p:"运营组",r:"运营合作组",o:2,n:2,d:0},
+{p:"运营组",r:"逆战宣发组",o:4,n:2,d:-2},
+{p:"运营组",r:"逆战产品运营组",o:5,n:4,d:-1},
+{p:"运营组",r:"CODM宣发组",o:2,n:1,d:-1},
+{p:"运营组",r:"CODM产品运营组",o:3,n:2,d:-1},
+{p:"运营组",r:"宣发创意组",o:0,n:0,d:0},
+{p:"引擎技术组",r:"引擎基础组",o:1,n:1,d:0},
+{p:"引擎技术组",r:"引擎一组",o:2,n:2,d:0},
+{p:"引擎技术组",r:"引擎二组",o:3,n:1,d:-2},
+{p:"引擎技术组",r:"引擎四组",o:2,n:1,d:-1},
+{p:"质量管理组",r:"质量管理组",o:4,n:3,d:-1}
+];
 function pclr(p){return p>=50?'var(--green)':p>=10?'var(--orange)':'var(--red)'}
 
 function rbar(){
@@ -467,10 +522,13 @@ document.getElementById('ovView').style.display=t==='ov'?'':'none';
 document.getElementById('projView').style.display=t==='proj'?'':'none';
 document.getElementById('hrView').style.display=t==='hr'?'':'none';
 document.getElementById('roleView').style.display=t==='role'?'':'none';
+document.getElementById('deltaView').style.display=t==='delta'?'':'none';
 document.getElementById('navOv').className='nav-btn'+(t==='ov'?' active':'');
 document.getElementById('navProj').className='nav-btn'+(t==='proj'?' active':'');
 document.getElementById('navHr').className='nav-btn'+(t==='hr'?' active':'');
 document.getElementById('navRole').className='nav-btn'+(t==='role'?' active':'');
+document.getElementById('navDelta').className='nav-btn'+(t==='delta'?' active':'');
+if(t==='delta') renderDelta();
 }
 
 var hrColors={'candy':'#e74c3c','杨倩':'#3498db','小卫':'#f39c12','嘉绮':'#2ecc71','小滨':'#9b59b6','berry':'#1abc9c','10':'#fd79a8'};
@@ -1028,7 +1086,7 @@ function updateKPI() {
   if (headerInfo) {
     var now = new Date();
     var dateStr = now.getFullYear() + '.' + String(now.getMonth() + 1).padStart(2, '0') + '.' + String(now.getDate()).padStart(2, '0');
-    headerInfo.textContent = '数据统计截至 ' + dateStr + ' · 共 13 个项目/中心 · 总需求数 ' + gtn;
+    headerInfo.textContent = '数据统计截至 ' + dateStr + ' · 共 12 个项目/中心 · 总需求数 ' + gtn + '（26.5 review后）';
   }
 }
 
@@ -1036,6 +1094,146 @@ function updateKPI() {
 
 // 初始化调用
 updateKPI();
+
+// 需求变化分析
+function renderDelta(){
+var el=document.getElementById('deltaContent');
+if(el.innerHTML) return; // already rendered
+
+// Aggregate by project
+var projMap={};
+DELTA.forEach(function(d){
+  if(!projMap[d.p]) projMap[d.p]={old:0,new:0,diff:0,rows:[]};
+  projMap[d.p].old+=d.o;
+  projMap[d.p].new+=d.n;
+  projMap[d.p].diff+=d.d;
+  projMap[d.p].rows.push(d);
+});
+
+// Aggregate by role type (岗位类型)
+var roleTypes={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
+var roleOld={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
+var roleNew={'策划':0,'美术':0,'客户端':0,'服务器':0,'项目管理':0,'运营':0,'引擎':0,'质量':0,'技术美术':0,'设计':0,'其他':0};
+
+DELTA.forEach(function(d){
+  var cat='其他';
+  var r=d.r.toLowerCase();
+  if(r.indexOf('策划')>=0) cat='策划';
+  else if(r.indexOf('美术')>=0||r.indexOf('美宣')>=0||r.indexOf('3d')>=0||r.indexOf('2d')>=0||r.indexOf('动效')>=0||r.indexOf('特效')>=0) cat='美术';
+  else if(r.indexOf('客户端')>=0) cat='客户端';
+  else if(r.indexOf('服务器')>=0) cat='服务器';
+  else if(r.indexOf('项目管理')>=0||r.indexOf('pm')>=0) cat='项目管理';
+  else if(r.indexOf('运营')>=0||r.indexOf('宣发')>=0||r.indexOf('codm')>=0||r.indexOf('数据研究')>=0) cat='运营';
+  else if(r.indexOf('引擎')>=0) cat='引擎';
+  else if(r.indexOf('质量')>=0||r.indexOf('测试')>=0) cat='质量';
+  else if(r.indexOf('技术美术')>=0) cat='技术美术';
+  else if(r.indexOf('视觉')>=0||r.indexOf('交互')>=0||r.indexOf('设计')>=0||r.indexOf('多媒体')>=0||r.indexOf('品宣')>=0) cat='设计';
+  roleOld[cat]+=d.o;
+  roleNew[cat]+=d.n;
+  roleTypes[cat]+=d.d;
+});
+
+var totalOld=DELTA.reduce(function(s,d){return s+d.o},0);
+var totalNew=DELTA.reduce(function(s,d){return s+d.n},0);
+var totalDiff=totalNew-totalOld;
+
+var h='';
+// Summary KPI
+h+='<div class="kpi-grid" style="margin-bottom:32px">';
+h+='<div class="kpi-card kpi-blue"><div class="kpi-label">26.2 原始需求</div><div class="kpi-value">'+totalOld+'</div></div>';
+h+='<div class="kpi-card kpi-green"><div class="kpi-label">26.5 review后需求</div><div class="kpi-value">'+totalNew+'</div></div>';
+h+='<div class="kpi-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px"><div class="kpi-label">净变化</div><div class="kpi-value" style="color:var(--red)">'+totalDiff+'</div><div class="kpi-sub">降幅 '+(((totalOld-totalNew)/totalOld)*100).toFixed(1)+'%</div></div>';
+h+='<div class="kpi-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px"><div class="kpi-label">缩减岗位数</div><div class="kpi-value" style="color:var(--orange)">'+DELTA.filter(function(d){return d.d<0}).length+'</div><div class="kpi-sub">共 '+DELTA.length+' 个岗位方向</div></div>';
+h+='</div>';
+
+// By project chart
+h+='<div class="bcs" style="margin-bottom:32px"><h3>📊 按项目：需求变化对比</h3>';
+h+='<div style="margin-top:16px">';
+var projs=Object.keys(projMap).sort(function(a,b){return projMap[a].diff-projMap[b].diff});
+var maxVal=Math.max.apply(null,projs.map(function(p){return Math.max(projMap[p].old,projMap[p].new)}));
+
+projs.forEach(function(p){
+  var d=projMap[p];
+  var diffStr=d.diff>0?'+'+d.diff:d.diff===0?'0':String(d.diff);
+  var diffColor=d.diff<0?'var(--red)':d.diff>0?'var(--green)':'var(--text2)';
+  var oldW=maxVal>0?(d.old/maxVal*100):0;
+  var newW=maxVal>0?(d.new/maxVal*100):0;
+  h+='<div style="margin-bottom:14px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+  h+='<span style="font-size:13px;font-weight:600;color:var(--text)">'+p+'</span>';
+  h+='<span style="font-size:13px;font-weight:700;color:'+diffColor+'">'+diffStr+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+  h+='<span style="font-size:11px;color:var(--text2);width:50px">26.2</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative"><div style="width:'+oldW+'%;height:100%;background:rgba(255,255,255,0.15);border-radius:4px"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--text2);width:30px;text-align:right">'+d.old+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px">';
+  h+='<span style="font-size:11px;color:var(--accent);width:50px">26.5</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden;position:relative"><div style="width:'+newW+'%;height:100%;background:var(--accent);border-radius:4px;opacity:0.7"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--accent);width:30px;text-align:right">'+d.new+'</span>';
+  h+='</div>';
+  h+='</div>';
+});
+h+='</div></div>';
+
+// By role type chart
+h+='<div class="bcs" style="margin-bottom:32px"><h3>🏷️ 按岗位类型：需求变化对比</h3>';
+h+='<div style="margin-top:16px">';
+var roleCats=Object.keys(roleTypes).filter(function(k){return roleOld[k]>0||roleNew[k]>0}).sort(function(a,b){return roleTypes[a]-roleTypes[b]});
+var roleMax=Math.max.apply(null,roleCats.map(function(k){return Math.max(roleOld[k],roleNew[k])}));
+
+roleCats.forEach(function(cat){
+  var diff=roleTypes[cat];
+  var diffStr=diff>0?'+'+diff:diff===0?'0':String(diff);
+  var diffColor=diff<0?'var(--red)':diff>0?'var(--green)':'var(--text2)';
+  var oldW=roleMax>0?(roleOld[cat]/roleMax*100):0;
+  var newW=roleMax>0?(roleNew[cat]/roleMax*100):0;
+  h+='<div style="margin-bottom:14px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+  h+='<span style="font-size:13px;font-weight:600;color:var(--text)">'+cat+'</span>';
+  h+='<span style="font-size:13px;font-weight:700;color:'+diffColor+'">'+diffStr+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+  h+='<span style="font-size:11px;color:var(--text2);width:50px">26.2</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+oldW+'%;height:100%;background:rgba(255,255,255,0.15);border-radius:4px"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--text2);width:30px;text-align:right">'+roleOld[cat]+'</span>';
+  h+='</div>';
+  h+='<div style="display:flex;align-items:center;gap:8px">';
+  h+='<span style="font-size:11px;color:var(--accent);width:50px">26.5</span>';
+  h+='<div style="flex:1;height:16px;background:var(--bg);border-radius:4px;overflow:hidden"><div style="width:'+newW+'%;height:100%;background:var(--accent);border-radius:4px;opacity:0.7"></div></div>';
+  h+='<span style="font-size:12px;font-weight:600;color:var(--accent);width:30px;text-align:right">'+roleNew[cat]+'</span>';
+  h+='</div>';
+  h+='</div>';
+});
+h+='</div></div>';
+
+// Detail table
+h+='<div class="bcs"><h3>📋 详细变化明细（仅显示有变化的岗位）</h3>';
+h+='<div style="margin-top:16px;overflow-x:auto">';
+h+='<table style="width:100%;border-collapse:collapse;font-size:13px">';
+h+='<tr style="background:var(--card);border-bottom:1px solid var(--border)">';
+h+='<th style="padding:10px 12px;text-align:left;color:var(--text2)">项目</th>';
+h+='<th style="padding:10px 12px;text-align:left;color:var(--text2)">岗位</th>';
+h+='<th style="padding:10px 12px;text-align:right;color:var(--text2)">26.2需求</th>';
+h+='<th style="padding:10px 12px;text-align:right;color:var(--text2)">26.5需求</th>';
+h+='<th style="padding:10px 12px;text-align:right;color:var(--text2)">变化</th>';
+h+='</tr>';
+DELTA.filter(function(d){return d.d!==0}).sort(function(a,b){return a.d-b.d}).forEach(function(d){
+  var diffStr=d.d>0?'+'+d.d:String(d.d);
+  var diffColor=d.d<0?'#ff4757':d.d>0?'#00d68f':'var(--text2)';
+  h+='<tr style="border-bottom:1px solid var(--border)">';
+  h+='<td style="padding:8px 12px;color:var(--text)">'+d.p+'</td>';
+  h+='<td style="padding:8px 12px;color:var(--text)">'+d.r+'</td>';
+  h+='<td style="padding:8px 12px;text-align:right;color:var(--text2)">'+d.o+'</td>';
+  h+='<td style="padding:8px 12px;text-align:right;color:var(--accent)">'+d.n+'</td>';
+  h+='<td style="padding:8px 12px;text-align:right;font-weight:700;color:'+diffColor+'">'+diffStr+'</td>';
+  h+='</tr>';
+});
+h+='</table></div></div>';
+
+el.innerHTML=h;
+}
 
 </script>
 </body>

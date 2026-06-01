@@ -133,7 +133,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(79,140,255,.0
     <div class="bcs" style="margin-bottom:24px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
         <h3 style="margin:0">拒绝 OFFER 分析</h3>
-        <span style="font-size:12px;color:var(--text2);background:rgba(255,107,107,0.12);padding:4px 10px;border-radius:12px">共 <b style="color:#ff6b6b">13</b> 人拒签 · 拒签率 <b style="color:#ff6b6b">7.93%</b></span>
+        <span style="font-size:12px;color:var(--text2);background:rgba(255,107,107,0.12);padding:4px 10px;border-radius:12px">共 <b style="color:#ff6b6b">13</b> 人拒签 · 拒签率 <b style="color:#ff6b6b">7.10%</b>（基于183份offer）</span>
       </div>
       <!-- 上半部分：按组织 + 按细分岗位 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
@@ -1060,7 +1060,7 @@ function updateKPI() {
   var kpiCards = document.querySelectorAll('.kpi-grid .kpi-card');
   if (kpiCards.length >= 4) {
     kpiCards[0].querySelector('.kpi-value').textContent = gtn;
-    kpiCards[0].querySelector('.kpi-sub').textContent = '13 个项目/中心';
+    kpiCards[0].querySelector('.kpi-sub').textContent = '12 个项目/中心（26.5 review后）';
     
     kpiCards[1].querySelector('.kpi-value').textContent = gto;
     kpiCards[1].querySelector('.kpi-sub').textContent = '完成率 ' + rate.toFixed(2) + '%';

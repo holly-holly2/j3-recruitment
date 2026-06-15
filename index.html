@@ -125,7 +125,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(37,99,235,.03
     <div class="kpi-grid">
       <div class="kpi-card kpi-blue"><div class="kpi-label">总需求数</div><div class="kpi-value">246</div><div class="kpi-sub2" style="font-size:11px;color:var(--text2);margin-top:4px">系统需求 222</div></div>
       <div class="kpi-card kpi-green"><div class="kpi-label">已发 OFFER</div><div class="kpi-value">173</div><div class="kpi-sub">完成率 70.33%</div><div class="kpi-sub2" style="font-size:11px;color:var(--text2);margin-top:4px">系统口径 77.93%（需求222）</div></div>
-      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">81</div><div class="kpi-sub">剩余 29.67%</div><div class="kpi-sub2" style="font-size:11px;color:var(--text2);margin-top:4px">系统口径剩余 22.07%（需求222）</div></div>
+      <div class="kpi-card kpi-orange"><div class="kpi-label">待招需求</div><div class="kpi-value">81</div><div class="kpi-sub">剩余 29.67%</div><div class="kpi-sub2" style="font-size:11px;color:var(--text2);margin-top:4px">系统口径待招 49（需求222）</div></div>
       <div class="kpi-card kpi-red"><div class="kpi-label">初试</div><div class="kpi-value">1231</div><div class="kpi-sub">复试 191 · HR面 191</div></div>
     </div>
     <div class="bcs"><h3>📊 各项目需求&进展</h3><div id="bc"></div></div>
@@ -133,7 +133,7 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(37,99,235,.03
     <div class="bcs" style="margin-bottom:24px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
         <h3 style="margin:0">拒绝 OFFER 分析</h3>
-        <span style="font-size:12px;color:var(--text2);background:rgba(255,107,107,0.12);padding:4px 10px;border-radius:12px">共 <b style="color:#ff6b6b">18</b> 人拒签 · 拒签率 <b style="color:#ff6b6b">9.84%</b>（基于183份offer）</span>
+        <span style="font-size:12px;color:var(--text2);background:rgba(255,107,107,0.12);padding:4px 10px;border-radius:12px">共 <b style="color:#ff6b6b">22</b> 人拒签 · 拒签率 <b style="color:#ff6b6b">11.28%</b>（拒签/(已发173+拒签22)）</span>
       </div>
       <!-- 上半部分：按组织 + 按细分岗位 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
@@ -190,13 +190,13 @@ tbody tr{transition:background .15s}tbody tr:hover{background:rgba(37,99,235,.03
             <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(164,176,190,0.06);border-radius:8px"><span style="font-size:12px;color:var(--text1);font-weight:500">留校科研</span><span style="font-size:14px;font-weight:800;color:#a4b0be">1</span></div>
           </div>
           <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);text-align:center">
-            已追踪去向 <b style="color:var(--text1)">8</b>/18 人，10人待确认
+            已追踪去向 <b style="color:var(--text1)">8</b>/22 人，14人待确认
           </div>
         </div>
       </div>
       <!-- 洞察 -->
       <div style="margin-top:16px;padding:14px 18px;background:linear-gradient(135deg,rgba(255,107,107,0.06),rgba(255,165,2,0.04));border-radius:10px;border:1px solid rgba(255,107,107,0.15)">
-        <div style="font-size:12px;color:var(--text1);line-height:1.7"><b style="color:#ff6b6b">💡 洞察：</b>拒签18人（拒签率9.84%），技术研发类最集中（10/18，服务器6+客户端3+测试1），游戏产品类8人（策划4+运营4）。穿越火线手游/H项目组拒签最多（合计8人），其次DF项目组和运营组各4人。建议对服务器/客户端岗位加强候选人意向管理，尤其是穿越火线手游项目的服务器岗位。</div>
+        <div style="font-size:12px;color:var(--text1);line-height:1.7"><b style="color:#ff6b6b">💡 洞察：</b>系统口径共拒签22人，拒签率11.28%（拒签22/(已发173+拒签22)）。其中18人已完成去向/原因追踪：技术研发类最集中（10/18，服务器6+客户端3+测试1），游戏产品类8人（策划4+运营4）。穿越火线手游/H项目组拒签最多（合计8人），其次DF项目组和运营组各4人。建议对服务器/客户端岗位加强候选人意向管理，尤其是穿越火线手游项目的服务器岗位。<span style="color:var(--text2)">（下方明细为已追踪的18人，剩余4人去向待确认）</span></div>
       </div>
     </div>
 
@@ -1013,7 +1013,7 @@ lx+=ctx.measureText(s.label).width+28;
 }
 
 function loadTrend(){
-fetch('history.json').then(function(r){return r.json()}).then(function(history){
+fetch('history.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(history){
 // Total trend
 drawLine('trendCanvasAll',history,function(h){
 return [{label:'总完成率',data:h.map(function(d){return d.total.rate}),color:'#4f8cff'}];
@@ -1068,7 +1068,7 @@ function updateKPI() {
     kpiCards[2].querySelector('.kpi-value').textContent = gtp;
     kpiCards[2].querySelector('.kpi-sub').textContent = '剩余 ' + (100 - rate).toFixed(2) + '%';
     var sub2El2 = kpiCards[2].querySelector('.kpi-sub2');
-    if (sub2El2) sub2El2.textContent = '系统口径剩余 ' + (100 - sysRate).toFixed(2) + '%（需求' + sysNeed + '）';
+    if (sub2El2) sub2El2.textContent = '系统口径待招 ' + (sysNeed - gto) + '（需求' + sysNeed + '）';
     
     kpiCards[3].querySelector('.kpi-value').textContent = gtf;
     kpiCards[3].querySelector('.kpi-sub').textContent = '复试 ' + gts + ' · HR面试 ' + gth;

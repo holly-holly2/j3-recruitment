@@ -859,10 +859,10 @@
   {
     "date": "2026-06-15",
     "total": {
-      "need": 246,
+      "need": 245,
       "offer": 173,
-      "pending": 73,
-      "rate": 70.33
+      "pending": 72,
+      "rate": 70.61
     },
     "byRole": {
       "策划": {
@@ -886,9 +886,9 @@
         "rate": 78.95
       },
       "项目管理": {
-        "need": 8,
+        "need": 7,
         "offer": 5,
-        "rate": 62.5
+        "rate": 71.43
       },
       "运营": {
         "need": 40,
@@ -908,9 +908,9 @@
     },
     "byProject": {
       "逆战项目组": {
-        "need": 45,
+        "need": 44,
         "offer": 26,
-        "rate": 57.78
+        "rate": 59.09
       },
       "C-Game项目组": {
         "need": 21,

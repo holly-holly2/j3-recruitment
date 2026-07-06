@@ -1028,24 +1028,29 @@ lx+=ctx.measureText(s.label).width+28;
 
 function loadTrend(){
 fetch('history.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(history){
+if(!history||!history.length)return;
 // Total trend
 drawLine('trendCanvasAll',history,function(h){
-return [{label:'总完成率',data:h.map(function(d){return d.total.rate}),color:'#4f8cff'}];
+return [{label:'总完成率',data:h.map(function(d){return d.total?d.total.rate:0}),color:'#4f8cff'}];
 });
 
-// By role trend
+// By role trend - collect all role keys from all entries
 drawLine('trendCanvasRole',history,function(h){
-var roles=Object.keys(h[0].byRole);
+var roleSet={};
+h.forEach(function(d){if(d.byRole)Object.keys(d.byRole).forEach(function(r){roleSet[r]=1})});
+var roles=Object.keys(roleSet);
 return roles.map(function(r,i){
-return {label:r,data:h.map(function(d){return d.byRole[r]?d.byRole[r].rate:0}),color:trendColors[i%trendColors.length]};
+return {label:r,data:h.map(function(d){return (d.byRole&&d.byRole[r])?d.byRole[r].rate:0}),color:trendColors[i%trendColors.length]};
 });
 });
 
-// By project trend
+// By project trend - collect all project keys from all entries
 drawLine('trendCanvasProj',history,function(h){
-var projs=Object.keys(h[0].byProject);
+var projSet={};
+h.forEach(function(d){if(d.byProject)Object.keys(d.byProject).forEach(function(p){projSet[p]=1})});
+var projs=Object.keys(projSet);
 return projs.map(function(p,i){
-return {label:p.replace('项目组','').replace('组',''),data:h.map(function(d){return d.byProject[p]?d.byProject[p].rate:0}),color:trendColors[i%trendColors.length]};
+return {label:p.replace('项目组','').replace('组',''),data:h.map(function(d){return (d.byProject&&d.byProject[p])?d.byProject[p].rate:0}),color:trendColors[i%trendColors.length]};
 });
 });
 }).catch(function(e){console.log('No history data yet:',e)});
